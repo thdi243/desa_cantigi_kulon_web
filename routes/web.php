@@ -51,3 +51,13 @@ Route::prefix('kabar-desa')->group(function () {
 
 // pages galeri
 Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri');
+
+// view surat template
+Route::get('/surat/{surat}/view', [SuratController::class, 'view'])
+    ->name('surat.view')
+    ->middleware('auth');
+
+Route::post('/surat/{surat}/send-email', [SuratController::class, 'sendEmail'])->name('surat.send-email');
+Route::get('/surat/{surat}/download', [SuratController::class, 'downloadPdf'])->name('surat.download');
+Route::get('surat/print/{id}', [SuratController::class, 'print'])->name('surat.print');
+Route::get('surat/approve/{id}', [SuratController::class, 'print'])->name('surat.approve');
