@@ -65,7 +65,7 @@
                                         class="block w-full px-4 py-3 border rounded-md shadow-sm 
                                     focus:ring-green-500 focus:border-green-500"
                                         required>
-                                        <option value="">Pilih Kategori Pengaduan</option>
+                                        <option value="" disabled selected>Pilih Kategori Pengaduan</option>
                                         <option value="infrastruktur">Infrastruktur</option>
                                         <option value="pelayanan">Pelayanan Publik</option>
                                         <option value="lingkungan">Lingkungan</option>
@@ -85,9 +85,9 @@
 
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     <div>
-                                        <label for="photo" class="block text-sm font-medium text-gray-700 mb-2">Unggah
+                                        <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Unggah
                                             Foto Bukti</label>
-                                        <input type="file" name="photo" id="photo" accept="image/*"
+                                        <input type="file" name="image" id="image" accept="image/*"
                                             class="block w-full text-sm text-gray-500
                                         file:mr-4 file:py-2 file:px-4
                                         file:rounded-full file:border-0

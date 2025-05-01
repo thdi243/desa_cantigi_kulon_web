@@ -14,7 +14,7 @@
                         class="link text-white hover:text-orange-300 px-3 py-2 rounded-md text-sm font-medium">Beranda</a>
                     <a href="#pelayanan"
                         class="link text-white hover:text-orange-300 px-3 py-2 rounded-md text-sm font-medium">Pelayanan</a>
-                    <a href="#profil-desa"
+                    <a href="{{ route('profile-desa') }}"
                         class="link text-white hover:text-orange-300 px-3 py-2 rounded-md text-sm font-medium">Profil
                         Desa</a>
                     <a href="{{ route('pengaduan.create') }}"
@@ -35,7 +35,7 @@
                                     <!-- Dropdown menu (hidden by default) -->
                                     <div id="profile-dropdown-menu"
                                         class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                                        <a href="#"
+                                        <a href="{{ route('profile.edit') }}"
                                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
                                         <a href="#"
                                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
@@ -48,6 +48,14 @@
                                         </form>
                                     </div>
                                 </div>
+                            @else
+                                <!-- If role_id is not 2, show login/register buttons -->
+                                <a href="{{ route('login') }}" id="login-button" target="_blank"
+                                    class="btn-auth px-4 py-2 text-sm font-medium text-white border-1 rounded-md hover:text-black hover:border-white hover:bg-white">Masuk</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" id="register-button" target="_blank"
+                                        class="ml-3 px-4 py-2 text-sm font-medium text-white bg-orange-300 hover:bg-orange-400 rounded-md">Daftar</a>
+                                @endif
                             @endif
                         @else
                             <!-- User is not authenticated, show login/register buttons -->

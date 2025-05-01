@@ -48,47 +48,53 @@
                         </h5>
                         <div id="data_pemohon_fields" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label for="nama_lengkap" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap
+                                <label for="nama_lengkap_pemohon" class="block text-sm font-medium text-gray-700 mb-1">Nama
+                                    Lengkap
                                     *</label>
-                                <input type="text" id="nama_lengkap" name="nama_lengkap"
+                                <input type="text" id="nama_lengkap_pemohon" name="nama_lengkap_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
                             </div>
                             <div>
-                                <label for="nik" class="block text-sm font-medium text-gray-700 mb-1">NIK *</label>
-                                <input type="number" id="nik" name="nik"
+                                <label for="nik_pemohon" class="block text-sm font-medium text-gray-700 mb-1">NIK *</label>
+                                <input type="number" id="nik_pemohon" name="nik_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
                             </div>
                             <div>
-                                <label for="tempat_lahir" class="block text-sm font-medium text-gray-700 mb-1">Tempat Lahir
+                                <label for="tempat_lahir_pemohon"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Tempat Lahir
                                     *</label>
-                                <input type="text" id="tempat_lahir" name="tempat_lahir"
+                                <input type="text" id="tempat_lahir_pemohon" name="tempat_lahir_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
                             </div>
                             <div>
-                                <label for="tanggal_lahir" class="block text-sm font-medium text-gray-700 mb-1">Tanggal
+                                <label for="tgl_lahir_pemohon" class="block text-sm font-medium text-gray-700 mb-1">Tanggal
                                     Lahir *</label>
-                                <input type="date" id="tanggal_lahir" name="tanggal_lahir"
+                                <input type="date" id="tgl_lahir_pemohon" name="tgl_lahir_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
                             </div>
                             <div>
-                                <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700 mb-1">Jenis
+                                <label for="jenis_kelamin_pemohon"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Jenis
                                     Kelamin *</label>
-                                <select id="jenis_kelamin" name="jenis_kelamin"
+                                <select id="jenis_kelamin_pemohon" name="jenis_kelamin_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
-                                    <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
+                                    <option value="" disabled selected>Pilih Jenis Kelamin</option>
                                     <option value="L">Laki-laki</option>
                                     <option value="P">Perempuan</option>
                                 </select>
                             </div>
                             <div>
-                                <label for="alamat" class="block text-sm font-medium text-gray-700 mb-1">Alamat *</label>
-                                <textarea id="alamat" name="alamat" rows="2" class="w-full border border-gray-300 rounded-md p-2" required></textarea>
+                                <label for="alamat_pemohon" class="block text-sm font-medium text-gray-700 mb-1">Alamat
+                                    *</label>
+                                <textarea id="alamat_pemohon" name="alamat_pemohon" rows="2" class="w-full border border-gray-300 rounded-md p-2"
+                                    required></textarea>
                             </div>
                             <div>
-                                <label for="agama" class="block text-sm font-medium text-gray-700 mb-1">Agama *</label>
-                                <select id="agama" name="agama" class="w-full border border-gray-300 rounded-md p-2"
-                                    required>
-                                    <option value="" disabled selected>-- Pilih Agama --</option>
+                                <label for="agama_pemohon" class="block text-sm font-medium text-gray-700 mb-1">Agama
+                                    *</label>
+                                <select id="agama_pemohon" name="agama_pemohon"
+                                    class="w-full border border-gray-300 rounded-md p-2" required>
+                                    <option value="" disabled selected>Pilih Agama</option>
                                     <option value="islam">Islam</option>
                                     <option value="kristen">Kristen</option>
                                     <option value="katolik">Katolik</option>
@@ -98,15 +104,17 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="pekerjaan" class="block text-sm font-medium text-gray-700 mb-1">Pekerjaan
+                                <label for="pekerjaan_pemohon"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Pekerjaan
                                     *</label>
-                                <input type="text" id="pekerjaan" name="pekerjaan"
+                                <input type="text" id="pekerjaan_pemohon" name="pekerjaan_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
                             </div>
                             <div class="md:col-span-2">
-                                <label for="keperluan"
+                                <label for="keperluan_pemohon"
                                     class="block text-sm font-medium text-gray-700 mb-1">Keperluan</label>
-                                <textarea id="keperluan" name="keperluan" rows="2" class="w-full border border-gray-300 rounded-md p-2" required></textarea>
+                                <textarea id="keperluan_pemohon" name="keperluan_pemohon" rows="2"
+                                    class="w-full border border-gray-300 rounded-md p-2" required></textarea>
                             </div>
                         </div>
                     </div>
