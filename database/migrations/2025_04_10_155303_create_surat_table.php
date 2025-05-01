@@ -37,15 +37,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
-            // $table->bigInteger('nik');
-            // $table->string('nama');
-            // $table->string('tempat_lahir');
-            // $table->date('tanggal_lahir');
-            // $table->enum('jenis_kelamin', ['L', 'P']);
-            // $table->string('alamat');
-            // $table->string('agama');
-            // $table->string('pekerjaan');
-            // $table->string('keperluan');
         });
     }
 
