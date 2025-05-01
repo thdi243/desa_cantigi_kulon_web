@@ -24,8 +24,8 @@ class PengaduanController extends Controller
     // store pengaduan
     public function store(Request $request)
     {
-        // var_dump($request->all());
-        // die();
+        // dd($request->all());
+
         $validator = Validator::make(
             $request->all(),
             [
@@ -34,12 +34,12 @@ class PengaduanController extends Controller
                 'category' => ['required', 'string', 'max:255'],
                 'description' => ['required', 'string', 'max:1000'],
                 'location' => ['required', 'string', 'max:255'],
-                'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+                'image' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
             ],
             [
                 'nik.digits' => 'NIK harus tepat 16 digit.',
-                'photo.max' => 'Ukuran foto maksimal 2MB.',
-                'photo.mimes' => 'Format foto harus jpeg, png, jpg, gif, atau svg.',
+                'image.max' => 'Ukuran foto maksimal 2MB.',
+                'image.mimes' => 'Format foto harus jpeg, png, jpg',
             ]
         );
 
@@ -51,7 +51,7 @@ class PengaduanController extends Controller
 
         try {
             // store pengaduan
-            $photoPath = $request->file('photo')->store('photos', 'public');
+            $photoPath = $request->file('image')->store('photos', 'public');
 
             PengaduanModel::create([
                 'name' => $request['name'],

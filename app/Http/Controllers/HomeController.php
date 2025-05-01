@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\KabarDesaModel;
 use App\Models\SuratTypeModel;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        // Cek jika user sudah login dan role_id adalah 1, redirect ke login
+        if (Auth::check() && Auth::user()->role_id == 1) {
+            return redirect('/admin');
+        }
+
         $suratTypes = SuratTypeModel::all();
 
         $kabarDesa = KabarDesaModel::where('status', 'published')

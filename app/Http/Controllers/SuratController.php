@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\SuratTypeModel;
-use App\Models\SubSuratTypeModel;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
-use App\Models\SuratModel as Surat;
 use App\Models\User;
-
+use App\Models\SuratModel;
 use function Ramsey\Uuid\v1;
+use Illuminate\Http\Request;
+use App\Models\SuratTypeModel;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\SubSuratTypeModel;
+use App\Models\SuratModel as Surat;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class SuratController extends Controller
 {
+
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -31,6 +36,8 @@ class SuratController extends Controller
     {
         // Cek apakah pengguna sudah login
         if (!Auth::check()) {
+            return redirect()->route('login');
+        } elseif (Auth::user()->role_id !== 2) {
             return redirect()->route('login');
         }
 
@@ -398,15 +405,15 @@ class SuratController extends Controller
         // Validasi data yang diterima
         $baseRules = [
             'jenis_surat' => ['required', 'integer'],
-            'nik' => ['required', 'numeric', 'digits:16'],
-            'nama_lengkap' => ['required', 'string', 'max:255'],
-            'tempat_lahir' => ['required', 'string', 'max:255'],
-            'tanggal_lahir' => ['required', 'date'],
-            'jenis_kelamin' => ['required', 'in:L,P'],
-            'alamat' => ['required', 'string', 'max:255'],
-            'agama' => ['required', 'string', 'max:255'],
-            'pekerjaan' => ['required', 'string', 'max:255'],
-            'keperluan' => ['required', 'string'],
+            'nik_pemohon' => ['required', 'numeric', 'digits:16'],
+            'nama_lengkap_pemohon' => ['required', 'string', 'max:255'],
+            'tempat_lahir_pemohon' => ['required', 'string', 'max:255'],
+            'tgl_lahir_pemohon' => ['required', 'date'],
+            'jenis_kelamin_pemohon' => ['required', 'in:L,P'],
+            'alamat_pemohon' => ['required', 'string', 'max:255'],
+            'agama_pemohon' => ['required', 'string', 'max:255'],
+            'pekerjaan_pemohon' => ['required', 'string', 'max:255'],
+            'keperluan_pemohon' => ['required', 'string'],
         ];
 
         // Ambil aturan validasi dinamis
@@ -431,15 +438,15 @@ class SuratController extends Controller
             // Data dasar yang akan disimpan ke data_pemohon
             $baseFields = [
                 'jenis_surat',
-                'nik',
-                'nama_lengkap',
-                'tempat_lahir',
-                'tanggal_lahir',
-                'jenis_kelamin',
-                'alamat',
-                'agama',
-                'pekerjaan',
-                'keperluan',
+                'nik_pemohon',
+                'nama_lengkap_pemohon',
+                'tempat_lahir_pemohon',
+                'tgl_lahir_pemohon',
+                'jenis_kelamin_pemohon',
+                'alamat_pemohon',
+                'agama_pemohon',
+                'pekerjaan_pemohon',
+                'keperluan_pemohon',
             ];
 
             // Pisahkan data_pemohon dan data_surat
@@ -455,6 +462,8 @@ class SuratController extends Controller
 
             // Buat objek Surat baru
             $surat = new Surat();
+            $surat->tgl_surat = now()->format('Y-m-d');
+            $surat->nomor_surat = 'SURAT/' . now()->format('Y') . '/' . strtoupper(substr($request->nama_lengkap, 0, 3)) . '/' . strtoupper(substr($request->jenis_surat, 0, 3)) . '/' . uniqid();
             $surat->sub_surat_type_id = $request->jenis_surat;
 
             // Simpan data_pemohon dan data_surat dalam format JSON
@@ -562,10 +571,45 @@ class SuratController extends Controller
     /**
      * Display the specified resource.
      */
-    // public function show(string $id)
-    // {
-    //     //
-    // }
+    public function view(Surat $surat)
+    {
+        // Pastikan pengguna memiliki otorisasi untuk melihat surat
+        $this->authorize('view', $surat);
+
+        // Render view template surat
+        return view('surat.view', [
+            'surat' => $surat,
+            // Tambahkan data tambahan yang diperlukan
+            'details' => $surat->load(['relatedModels']), // Contoh eager loading
+        ]);
+    }
+
+    /**
+     * Generate dan download PDF surat
+     */
+    public function print($id)
+    {
+        // Ambil record surat
+        $surat = SuratModel::findOrFail($id);
+
+        // Generate PDF
+        $pdf = PDF::loadView('pdfs.surat-template', [
+            'surat' => $surat,
+        ]);
+
+        // Generate nama file unik
+        $filename = 'surat_' . $surat->data_pemohon['nama_lengkap_pemohon'] . '.pdf';
+
+        // Simpan di storage public
+        $path = 'surat/' . $filename;
+        Storage::disk('public')->put($path, $pdf->output());
+
+        // Generate URL untuk didownload
+        $url = Storage::url($path);
+
+        // Download PDF
+        return $pdf->download($filename);
+    }
 
     // /**
     //  * Show the form for editing the specified resource.
