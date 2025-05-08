@@ -15,6 +15,11 @@ return new class extends Migration
             $table->timestamp('email_sent_at')->nullable();
             $table->foreignId('email_sent_by')->nullable()->constrained('users')->onDelete('set null');
         });
+
+        Schema::table('pengaduan', function (Blueprint $table) {
+            $table->timestamp('email_sent_at')->nullable();
+            $table->foreignId('email_sent_by')->nullable()->constrained('users')->onDelete('set null');
+        });
     }
 
     /**
@@ -23,6 +28,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('surat', function (Blueprint $table) {
+            $table->dropForeign(['email_sent_by']);
+            $table->dropColumn('email_send_at');
+            $table->dropColumn('email_sent_by');
+        });
+
+        Schema::table('pengaduan', function (Blueprint $table) {
+            $table->dropForeign(['email_sent_by']);
             $table->dropColumn('email_send_at');
             $table->dropColumn('email_sent_by');
         });

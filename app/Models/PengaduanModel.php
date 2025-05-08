@@ -22,12 +22,17 @@ class PengaduanModel extends Model
         'location',
         'photo',
         'status',
-        'user_id'
+        'user_id',
+        'email_sent_at',
+        'email_sent_by',
+    ];
+
+    protected $casts = [
+        'email_sent_at' => 'datetime',
     ];
 
     public function getImageUrlAttribute()
     {
-        // Contoh: Jika gambar disimpan di storage
         return $this->photo ? Storage::url($this->photo) : null;
     }
 
