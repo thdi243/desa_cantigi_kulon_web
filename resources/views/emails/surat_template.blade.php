@@ -70,8 +70,6 @@
                 <p>Hormat kami,<br>
                     Kuwu Desa Cantigi Kulon<br>
                     Chaerotunnisa, S.Pd.I.</p>
-                {{-- {{ $surat->data_surat['jabatan_penandatangan'] ?? 'Kepala Desa' }}<br>
-                    {{ $surat->data_surat['nama_penandatangan'] ?? 'Kepala Desa' }}</p> --}}
             </div>
 
             <div class="footer">

@@ -593,22 +593,55 @@ class SuratController extends Controller
         $surat = SuratModel::findOrFail($id);
 
         // Generate PDF
-        $pdf = PDF::loadView('pdfs.surat-template', [
+        $storagePath = 'surat/printed';
+        Storage::disk('public')->makeDirectory($storagePath);
+        $imagePath = public_path('images/logo/darma-ayu-logo.png');
+        $base64Image = 'data:image/png;base64,' . base64_encode(file_get_contents($imagePath));
+
+        $pdf = PDF::loadView($this->getTemplateForSubType($surat->sub_surat_type_id), [
             'surat' => $surat,
+            'logoBase64' => $base64Image,
         ]);
 
         // Generate nama file unik
-        $filename = 'surat_' . $surat->data_pemohon['nama_lengkap_pemohon'] . '.pdf';
+        $filename = $surat->tgl_surat->format('Y-m-d') . '_' . $surat->subSuratType->nama_sub_surat . '_' . $surat->data_pemohon['nama_lengkap_pemohon'] . '.pdf';
 
         // Simpan di storage public
-        $path = 'surat/' . $filename;
-        Storage::disk('public')->put($path, $pdf->output());
+        $path = $storagePath . '/' . $filename;
+        $pdfContent = $pdf->output();
+        Storage::disk('public')->put($path, $pdfContent);
 
-        // Generate URL untuk didownload
+        // Generate URL untuk didownload (untuk referensi jika perlu)
         $url = Storage::url($path);
 
-        // Download PDF
-        return $pdf->download($filename);
+        // Download PDF - ini akan memicu download di browser
+        return $pdf->stream($filename);
+    }
+
+    private function getTemplateForSubType($subTypeId)
+    {
+
+        // Map sub_surat_type_id to the corresponding template
+        $templates = [
+            1 => 'pdfs.sk_domisili_masyarakat',
+            2 => 'pdfs.sk_wali_murid',
+            3 => 'pdfs.sk_penghasilan_ortu',
+            4 => 'pdfs.sk_beda_nama',
+            5 => 'pdfs.sk_domisili_lembaga',
+            6 => 'pdfs.sk_tidak_dalam_sengketa',
+            7 => 'pdfs.sk_taksir_tanah',
+            8 => 'pdfs.sk_kks_perbaikan',
+            9 => 'pdfs.sk_tidak_mampu',
+            10 => 'pdfs.sk_tidak_mampu_sekolah',
+            11 => 'pdfs.sk_tidak_mampu_bpjs',
+            12 => 'pdfs.sp_rt_rw',
+            13 => 'pdfs.sp_ktp',
+            14 => 'pdfs.si_usaha',
+            // Add more mappings as needed
+        ];
+
+        // Return the mapped template or a default one if not found
+        return $templates[$subTypeId] ?? 'pdfs.surat-template';
     }
 
     // /**

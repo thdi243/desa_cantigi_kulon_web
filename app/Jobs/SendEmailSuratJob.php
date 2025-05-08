@@ -119,14 +119,17 @@ class SendEmailSuratJob implements ShouldQueue
         $filename = $safeNomor . '_' . $namaPemohon . '.pdf';
 
         // Define storage paths
-        $storagePath = 'surat';
+        $storagePath = 'surat/send_email';
         $fullPath = $storagePath . '/' . $filename;
 
         // Ensure the directory exists
         Storage::disk('public')->makeDirectory($storagePath);
+        $imagePath = public_path('images/logo/darma-ayu-logo.png');
+        $base64Image = 'data:image/png;base64,' . base64_encode(file_get_contents($imagePath));
 
         $pdf = PDF::loadView($this->getTemplateForSubType($this->surat->sub_surat_type_id), [
             'surat' => $this->surat,
+            'logoBase64' => $base64Image,
         ]);
 
         // Save PDF (choose ONE method, not both)

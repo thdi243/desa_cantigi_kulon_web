@@ -6,8 +6,6 @@ use stdClass;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
-use App\Actions\Star;
-use App\Models\ReqSurat;
 use Filament\Forms\Form;
 use Actions\SendToAction;
 use App\Models\SuratModel;
@@ -18,6 +16,7 @@ use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
 use Filament\Infolists\Components\Grid;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
@@ -28,12 +27,13 @@ use Filament\Notifications\Notification;
 use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\Actions;
-use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ViewEntry;
+use Filament\Support\Components\ViewComponent;
 use Filament\Infolists\Components\Actions\Action;
 use App\Filament\Resources\ReqSuratResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Infolists\Components\Section as InfolistSection;
 use Filament\Actions\Exports\Downloaders\Contracts\Downloader;
 
 class ReqSuratResource extends Resource
@@ -50,9 +50,7 @@ class ReqSuratResource extends Resource
     protected static ?string $modelLabel = 'Surat Masuk';
     protected static ?string $pluralModelLabel = 'Surat Masuk';
     protected static ?string $modelIcon = 'heroicon-o-document-text';
-    protected static ?string $modelUri = 'req-surat';
     protected static ?string $navigationGroupLabel = 'Surat';
-    protected static ?string $navigationGroupIcon = 'heroicon-o-document-text';
     protected static ?string $navigationSortLabel = 'Surat Masuk';
     protected static ?string $navigationGroupSortLabel = 'Surat Masuk';
     protected static ?int $navigationSort = 1;
@@ -60,34 +58,102 @@ class ReqSuratResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->columns(2)
             ->schema([
-                TextInput::make('nomor_surat')
-                    ->label('Nomor Surat')
-                    ->required()
-                    ->maxLength(255),
-                DatePicker::make('tgl_surat')
-                    ->label('Tanggal Surat')
-                    ->required(),
-                TextInput::make('data_pemohon.nama_lengkap_pemohon')
-                    ->label('Nama Pemohon')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('data_pemohon.nik_pemohon')
-                    ->label('NIK Pemohon')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('data_pemohon.tempat_lahir_pemohon')
-                    ->label('Tempat Lahir Pemohon')
-                    ->required()
-                    ->maxLength(255),
-                Select::make('status')
-                    ->options([
-                        'pending' => 'Pending',
-                        'approved' => 'Approved',
-                        'rejected' => 'Rejected',
+                Section::make('Informasi Pemohon')
+                    ->schema([
+                        TextInput::make('nomor_surat')
+                            ->label('Nomor Surat')
+                            ->required(),
+                        DatePicker::make('tgl_surat')
+                            ->label('Tanggal Surat')
+                            ->required(),
+                        TextInput::make('data_pemohon.nama_lengkap_pemohon')
+                            ->label('Nama Pemohon')
+                            ->required(),
+                        TextInput::make('data_pemohon.nik_pemohon')
+                            ->label('NIK Pemohon')
+                            ->required(),
+                        TextInput::make('data_pemohon.tempat_lahir_pemohon')
+                            ->label('Tempat Lahir Pemohon')
+                            ->required(),
+                        DatePicker::make('data_pemohon.tgl_lahir_pemohon')
+                            ->label('Tanggal Lahir')
+                            ->required(),
+
+                        Select::make('data_pemohon.jenis_kelamin_pemohon')
+                            ->label('Jenis Kelamin')
+                            ->required()
+                            ->options([
+                                'L' => 'Laki-laki',
+                                'P' => 'Perempuan',
+                            ])
+                            ->native(false),
+                        TextInput::make('data_pemohon.alamat_pemohon')
+                            ->label('Alamat')
+                            ->required(),
+                        Select::make('data_pemohon.agama_pemohon')
+                            ->label('Agama')
+                            ->required()
+                            ->options([
+                                'islam' => 'Islam',
+                                'kristen' => 'Kristen',
+                                'budha' => 'Budha',
+                                'katholik' => 'Katholik',
+                                'konghucu' => 'Konghucu',
+                                'hindu' => 'Hindu',
+                            ])
+                            ->native(false),
+                        TextInput::make('data_pemohon.pekerjaan_pemohon')
+                            ->label('Pekerjaan')
+                            ->required(),
+                        TextInput::make('data_pemohon.keperluan_pemohon')
+                            ->label('Keperluan')
+                            ->required(),
+                        Select::make('status')
+                            ->options([
+                                'pending' => 'Pending',
+                                'approved' => 'Approved',
+                                'rejected' => 'Rejected',
+                            ])
+                            ->native(false),
                     ])
-                    ->native(false),
+                    ->collapsible()
+                    ->columns(2),
+                Section::make('Informasi Surat')
+                    ->schema(function ($get) {
+                        $dataSurat = $get('data_surat') ?? [];
+                        $fields = [];
+
+                        // Iterating through data_surat field keys to create dynamic inputs
+                        if (is_array($dataSurat)) {
+                            foreach ($dataSurat as $key => $value) {
+                                // Skip nested arrays/objects - handle them separately if needed
+                                if (!is_array($value) && !is_object($value)) {
+                                    // Convert key from snake_case to Title Case for label
+                                    $label = ucwords(str_replace('_', ' ', $key));
+
+                                    // Create appropriate input based on value type
+                                    if (is_numeric($value)) {
+                                        $fields[] = TextInput::make("data_surat.{$key}")
+                                            ->label($label)
+                                            ->numeric();
+                                    } elseif (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
+                                        // Likely a date field
+                                        $fields[] = DatePicker::make("data_surat.{$key}")
+                                            ->label($label);
+                                    } else {
+                                        $fields[] = TextInput::make("data_surat.{$key}")
+                                            ->label($label);
+                                    }
+                                }
+                            }
+                        }
+
+                        return $fields;
+                    })
+                    ->collapsible()
+                    ->columns(2),
+                // ])->collapsible(),
             ]);
     }
 
@@ -185,7 +251,7 @@ class ReqSuratResource extends Resource
     {
         return $infolist
             ->schema([
-                Section::make('Informasi Pemohon')
+                InfolistSection::make('Informasi Pemohon')
                     ->schema([
                         Split::make([
                             Grid::make(2)
@@ -229,18 +295,35 @@ class ReqSuratResource extends Resource
                                     ]),
                                 ]),
                         ]),
+                        Split::make([
+                            Actions::make([
+                                Action::make('lihat_surat')
+                                    ->label('Lihat Template Surat')
+                                    ->color('primary')
+                                    ->icon('heroicon-o-document')
+                                    ->modalHeading(function ($record) {
+                                        return 'Surat: ' . ($record->nomor_surat ?? 'Draft');
+                                    })
+                                    ->modalContent(function ($record) {
+                                        $subSuratTypeId = $record->sub_surat_type_id;
+
+                                        $templateMapping = [
+                                            1 => 'filament.resources.req_surat.templates.sk_domisili_masyarakat',
+                                            2 => 'filament.resources.req_surat.templates.sk_wali_murid',
+                                            3 => 'filament.resources.req_surat.templates.sk_penghasilan_ortu',
+                                            // Add more mappings as needed
+                                        ];
+
+                                        $viewPath = $templateMapping[$subSuratTypeId] ?? 'filament.resources.req_surat.template_surat';
+
+                                        return view($viewPath, [
+                                            'record' => $record
+                                        ]);
+                                    })
+                                    ->modalWidth('3xl'),
+                            ])->columnSpanFull(),
+                        ]),
                     ])->collapsible(),
-
-                // Bagian untuk menampilkan surat yang sudah jadi
-                Section::make('Template Surat')
-                    ->schema([
-                        ViewEntry::make('rendered_surat')
-                            ->view('filament.resources.req_surat.surat_template')
-                            ->columnSpanFull(),
-                    ])
-                    ->collapsible(),
-
-                // Actions section
                 Actions::make([
                     Action::make('print')
                         ->label('Print Surat')
@@ -255,30 +338,24 @@ class ReqSuratResource extends Resource
                         ->color('success')
                         ->action(function ($record) {
                             try {
-                                // Find the associated user
                                 $user = User::findOrFail($record->user_id);
 
-                                // Validate email can be sent (extract validation logic)
                                 self::validateEmailSending($record);
 
-                                // Dispatch email job
                                 SendEmailSuratJob::dispatch($record, $record->user_id);
 
-                                // Show success notification
                                 Notification::make()
                                     ->title('Email Terkirim')
                                     ->body("Email untuk {$record->data_pemohon['nama_lengkap_pemohon']} berhasil dikirim.")
                                     ->success()
                                     ->send();
                             } catch (\Exception $e) {
-                                // Log the error for debugging
                                 Log::error('Email Sending Error', [
                                     'surat_id' => $record->id,
                                     'user_id' => $record->user_id,
                                     'error' => $e->getMessage(),
                                 ]);
 
-                                // Show error notification
                                 Notification::make()
                                     ->title('Gagal Mengirim Email')
                                     ->body($e->getMessage())
@@ -286,6 +363,7 @@ class ReqSuratResource extends Resource
                                     ->send();
                             }
                         }),
+
                 ])->fullWidth(),
             ]);
     }
@@ -306,16 +384,12 @@ class ReqSuratResource extends Resource
      */
     protected static function validateEmailSending($record)
     {
-        // Find the user associated with the surat
         $user = User::find($record->user_id);
 
-        // Check if user exists and has an email
         if (!$user || !$user->email) {
             throw new \Exception('Tidak ada email penerima yang tersedia.');
         }
 
-        // Additional validations can be added here
-        // For example, check if surat status is appropriate for sending
         if ($record->status !== 'approved') {
             throw new \Exception('Surat belum dapat dikirim. Status harus "approved".');
         }

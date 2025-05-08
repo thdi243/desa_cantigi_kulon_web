@@ -22,10 +22,8 @@ class SuratModel extends Model
         'data_surat',
         'status',
         'user_id',
-        'pdf_path',
         'email_sent_at',
         'email_sent_by',
-        'pdf_downloads'
     ];
 
     protected $casts = [

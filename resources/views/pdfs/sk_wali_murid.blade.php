@@ -199,37 +199,37 @@
                 </div>
             </div>
 
-            <p>Bahwa benar nama tersebut diatas merupakan warga Desa Cantigi Kulon Kecamatan Cantigi Kabupaten Indramayu
+            <p>Bahwa benar nama tersebut diatas merupakan warga Desa Toboali Kecamatan Toboali Kabupaten Bangka Selatan
                 yang sekarang bertempat tinggal dan atau berdomisili di :</p>
 
             <div class="identity">
                 <div class="identity-row">
                     <div class="identity-label">Blok</div>
                     <div class="identity-colon">:</div>
-                    <div class="identity-value">{{ $surat->data_surat['blok'] }}</div>
+                    {{-- <div class="identity-value">{{ $surat->data_surat['blok'] }}</div> --}}
                 </div>
                 <div class="identity-row">
                     <div class="identity-label">RT/RW</div>
                     <div class="identity-colon">:</div>
-                    <div class="identity-value">{{ $surat->data_surat['rt'] . '/' . $surat->data_surat['rw'] }}
-                    </div>
-                </div>
-                <div class="identity-row">
-                    <div class="identity-label">Desa</div>
-                    <div class="identity-colon">:</div>
-                    <div class="identity-value">{{ $surat->data_surat['desa'] }}</div>
-                </div>
-                <div class="identity-row">
-                    <div class="identity-label">Kecamatan</div>
-                    <div class="identity-colon">:</div>
-                    <div class="identity-value">{{ $surat->data_surat['kecamatan'] }}</div>
-                </div>
-                <div class="identity-row">
-                    <div class="identity-label">Kabupaten</div>
-                    <div class="identity-colon">:</div>
-                    <div class="identity-value">{{ $surat->data_surat['kabupaten'] }}</div>
+                    {{-- <div class="identity-value">{{ $surat->data_surat['rt'] . '/' . $surat->data_surat['rw'] }} --}}
                 </div>
             </div>
+            <div class="identity-row">
+                <div class="identity-label">Desa</div>
+                <div class="identity-colon">:</div>
+                {{-- <div class="identity-value">{{ $surat->data_surat['desa'] }}</div> --}}
+            </div>
+            <div class="identity-row">
+                <div class="identity-label">Kecamatan</div>
+                <div class="identity-colon">:</div>
+                {{-- <div class="identity-value">{{ $surat->data_surat['kecamatan'] }}</div> --}}
+            </div>
+            <div class="identity-row">
+                <div class="identity-label">Kabupaten</div>
+                <div class="identity-colon">:</div>
+                {{-- <div class="identity-value">{{ $surat->data_surat['kabupaten'] }}</div> --}}
+            </div>
+        </div>
         </div>
 
         <p class="closing">Demikian surat keterangan ini dibuat dengan sebenarnya, untuk dapat digunakan sebagaimana
@@ -248,3 +248,4 @@
     </body>
 
 </html>
+<
