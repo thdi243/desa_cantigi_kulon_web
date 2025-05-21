@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use stdClass;
 use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
@@ -15,6 +16,7 @@ use App\Jobs\SendEmailPengaduanJob;
 use Illuminate\Support\Facades\Log;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Contracts\HasTable;
 use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
@@ -44,10 +46,10 @@ class PengaduanResource extends Resource
     protected static ?string $navigationGroupLabel = 'Pengaduan';
     protected static ?string $navigationSortLabel = 'Pengaduan';
     protected static ?string $navigationGroupIcon = 'heroicon-o-rectangle-group';
-
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
+    protected static ?string $navigationBadgeTooltip = 'Pengaduan Pending';
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -89,6 +91,16 @@ class PengaduanResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('No')->state(
+                    static function (HasTable $livewire, stdClass $rowLoop): string {
+                        return (string) (
+                            $rowLoop->iteration +
+                            ($livewire->getTableRecordsPerPage() * (
+                                $livewire->getTablePage() - 1
+                            ))
+                        );
+                    }
+                ),
                 TextColumn::make('name')
                     ->label('Nama')
                     ->searchable(),
