@@ -65,15 +65,17 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-## Filament for Laravel
+## Filament Plugin to Admin
+
+<p align="center">
+    <img src="https://github.com/filamentphp/filament/assets/41773797/8d5a0b12-4643-4b5c-964a-56f0db91b90a" alt="Banner" style="width: 100%; max-width: 800px;" />
+</p>
+
+<p align="center">
+    <a href="https://github.com/filamentphp/filament/actions"><img alt="Tests passing" src="https://img.shields.io/badge/Tests-passing-green?style=for-the-badge&logo=github"></a>
+    <a href="https://laravel.com"><img alt="Laravel v10.x" src="https://img.shields.io/badge/Laravel-v10.x-FF2D20?style=for-the-badge&logo=laravel"></a>
+    <a href="https://livewire.laravel.com"><img alt="Livewire v3.x" src="https://img.shields.io/badge/Livewire-v3.x-FB70A9?style=for-the-badge"></a>
+    <a href="https://php.net"><img alt="PHP 8.1" src="https://img.shields.io/badge/PHP-8.1-777BB4?style=for-the-badge&logo=php"></a>
+</p>
 
 [Filament](https://filamentphp.com/) is a powerful admin panel and form builder for Laravel. It is highly customizable and works well with Laravel applications.
-
-### Installation
-
-To get started with Filament in your Laravel project, follow these steps:
-
-1. Install Filament via Composer:
-    ```bash
-    composer require filament/filament
-    ```
