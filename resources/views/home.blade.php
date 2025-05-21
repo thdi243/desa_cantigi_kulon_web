@@ -142,12 +142,12 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach ($kabarDesa as $berita)
                     <div class="bg-white rounded-lg overflow-hidden transition duration-300 hover:shadow-lg">
-                        <img src="{{ asset($berita->image) }}" alt="{{ $berita->title }}"
+                        <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->title }}"
                             class="w-full h-48 object-cover" />
                         <div class="p-6">
                             <div class="flex items-center text-sm text-gray-500 mb-2">
                                 <i class="uil uil-calendar-alt mr-2"></i>
-                                <span>{{ $berita->tgl_publish }}</span>
+                                <span>{{ \Carbon\Carbon::parse($berita->tgl_publish)->format('d M Y') }}</span>
                             </div>
                             <h3 class="text-xl font-bold text-[#676767] mb-3">
                                 {{ $berita->judul }}
@@ -186,77 +186,19 @@
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="gallery-item group relative overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/galeri 1.jpg') }}" alt="Kegiatan Desa 1"
-                        class="w-full h-48 md:h-64 object-cover transition duration-300 group-hover:scale-110" />
-                    <div
-                        class="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/70 to-transparent">
-                        <div class="text-white">
-                            <h4 class="font-bold text-lg">Gotong Royong Bersih Desa</h4>
-                            <p class="text-sm">Warga bersama-sama membersihkan lingkungan desa</p>
+                @foreach ($galeri as $item)
+                    <div class="gallery-item group relative overflow-hidden rounded-lg">
+                        <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}"
+                            class="w-full h-48 md:h-64 object-cover transition duration-300 group-hover:scale-110" />
+                        <div
+                            class="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/70 to-transparent">
+                            <div class="text-white">
+                                <h4 class="font-bold text-lg">{{ $item->judul }}</h4>
+                                <p class="text-sm">{{ $item->deskripsi }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="gallery-item group relative overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/galeri 2.jpg') }}" alt="Kegiatan Desa 2"
-                        class="w-full h-48 md:h-64 object-cover transition duration-300 group-hover:scale-110" />
-                    <div
-                        class="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/70 to-transparent">
-                        <div class="text-white">
-                            <h4 class="font-bold text-lg">Pelatihan Pertanian</h4>
-                            <p class="text-sm">Pemberdayaan petani dengan teknik modern</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-item group relative overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/galeri 3.jpg') }}" alt="Kegiatan Desa 3"
-                        class="w-full h-48 md:h-64 object-cover transition duration-300 group-hover:scale-110" />
-                    <div
-                        class="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/70 to-transparent">
-                        <div class="text-white">
-                            <h4 class="font-bold text-lg">Lomba Seni Budaya</h4>
-                            <p class="text-sm">Melestarikan kebudayaan lokal melalui perlombaan</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-item group relative overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/galeri 4.jpg') }}" alt="Kegiatan Desa 4"
-                        class="w-full h-48 md:h-64 object-cover transition duration-300 group-hover:scale-110" />
-                    <div
-                        class="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/70 to-transparent">
-                        <div class="text-white">
-                            <h4 class="font-bold text-lg">Posyandu Balita</h4>
-                            <p class="text-sm">Pemeriksaan kesehatan anak-anak di desa</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-item group relative overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/galeri 5.jpg') }}" alt="Kegiatan Desa 5"
-                        class="w-full h-48 md:h-64 object-cover transition duration-300 group-hover:scale-110" />
-                    <div
-                        class="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/70 to-transparent">
-                        <div class="text-white">
-                            <h4 class="font-bold text-lg">Pengajian Rutin</h4>
-                            <p class="text-sm">Kegiatan keagamaan warga desa</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-item group relative overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/galeri 6.jpg') }}" alt="Kegiatan Desa 6"
-                        class="w-full h-48 md:h-64 object-cover transition duration-300 group-hover:scale-110" />
-                    <div
-                        class="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/70 to-transparent">
-                        <div class="text-white">
-                            <h4 class="font-bold text-lg">Pembagian Bibit Tanaman</h4>
-                            <p class="text-sm">Program pemberdayaan lingkungan</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <div class="text-center mt-12">

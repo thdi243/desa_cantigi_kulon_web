@@ -46,7 +46,7 @@
                     @forelse($galeri as $item)
                         <div class="gallery-item {{ $item->kategori->slug }}" onclick="openLightbox({{ $loop->index }})">
                             <div class="relative overflow-hidden rounded-lg shadow-md group">
-                                <img src="{{ asset('storage/galeri/' . $item->gambar) }}" alt="{{ $item->judul }}"
+                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}"
                                     class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
                                 <div
                                     class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition duration-300">

@@ -55,7 +55,7 @@
                 {{-- Featured Image --}}
                 @if ($artikel->gambar)
                     <div class="mb-8">
-                        <img src="{{ asset('storage/berita/' . $artikel->gambar) }}" alt="{{ $artikel->judul }}"
+                        <img src="{{ asset('storage/' . $artikel->gambar) }}" alt="{{ $artikel->judul }}"
                             class="w-full h-auto rounded-lg shadow-md">
                     </div>
                 @endif
@@ -90,8 +90,8 @@
                                 <div
                                     class="bg-white shadow-md rounded-lg overflow-hidden transition duration-300 hover:shadow-lg">
                                     @if ($terkait->gambar)
-                                        <img src="{{ asset('storage/berita/' . $terkait->gambar) }}"
-                                            alt="{{ $terkait->judul }}" class="w-full h-40 object-cover">
+                                        <img src="{{ asset('storage/' . $terkait->gambar) }}" alt="{{ $terkait->judul }}"
+                                            class="w-full h-40 object-cover">
                                     @else
                                         <img src="{{ asset('images/default-berita.jpg') }}" alt="{{ $terkait->judul }}"
                                             class="w-full h-40 object-cover">

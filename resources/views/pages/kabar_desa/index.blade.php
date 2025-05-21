@@ -67,11 +67,12 @@
                     @forelse($berita as $artikel)
                         <div class="bg-white shadow-md rounded-lg overflow-hidden transition duration-300 hover:shadow-lg">
                             @if ($artikel->gambar)
-                                <img src="{{ asset('storage/berita/' . $artikel->gambar) }}" alt="{{ $artikel->judul }}"
+                                <img src="{{ asset('storage/' . $artikel->gambar) }}" alt="{{ $artikel->judul }}"
                                     class="w-full h-48 object-cover">
                             @else
-                                <img src="{{ asset('images/default-berita.jpg') }}" alt="{{ $artikel->judul }}"
-                                    class="w-full h-48 object-cover">
+                                <!-- Fallback image or logic for when there's no image -->
+                                {{-- <img src="{{ asset('storage/kabar_desa/' . $artikel->gambar) }}" alt="{{ $artikel->judul }}"
+                                    class="w-full h-48 object-cover"> --}}
                             @endif
                             <div class="p-4">
                                 <h2 class="font-bold text-xl mb-2 text-gray-800">{{ $artikel->judul }}</h2>
