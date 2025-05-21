@@ -27,7 +27,7 @@ return new class extends Migration
             $table->enum('status', ['draft', 'published'])->default('draft');
             $table->date('tgl_publish')->nullable();
             $table->foreignId('kategori_id')->constrained('kategori_berita')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

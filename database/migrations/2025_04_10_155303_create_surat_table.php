@@ -34,7 +34,7 @@ return new class extends Migration
             $table->json('data_pemohon');
             $table->json('data_surat')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });
