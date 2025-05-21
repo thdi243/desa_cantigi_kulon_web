@@ -59,3 +59,4 @@ Route::get('/surat/{surat}/view', [SuratController::class, 'view'])
 
 Route::get('surat/print/{id}', [SuratController::class, 'print'])->name('surat.print');
 Route::get('surat/approve/{id}', [SuratController::class, 'print'])->name('surat.approve');
+Route::get('get-fields/{id}', [SuratController::class, 'getFields'])->name('get-fields');
