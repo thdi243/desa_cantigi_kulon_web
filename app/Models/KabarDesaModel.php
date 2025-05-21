@@ -26,6 +26,10 @@ class KabarDesaModel extends Model
         'user_id',
     ];
 
+    protected $casts = [
+        'tgl_publish' => 'datetime',
+    ];
+
     public function kategori()
     {
         return $this->belongsTo(KategoriBeritaModel::class, 'kategori_id');

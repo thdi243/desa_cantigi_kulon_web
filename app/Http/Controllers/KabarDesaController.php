@@ -12,7 +12,6 @@ class KabarDesaController extends Controller
 {
     public function index(Request $request)
     {
-        // Ambil semua kategori berita untuk ditampilkan di dropdown
         $kategori = KategoriBeritaModel::all();
 
         // Siapkan query dasar
