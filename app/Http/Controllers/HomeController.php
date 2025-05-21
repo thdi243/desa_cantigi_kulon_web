@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GaleriModel;
 use Illuminate\Http\Request;
 use App\Models\KabarDesaModel;
 use App\Models\SuratTypeModel;
@@ -21,6 +22,11 @@ class HomeController extends Controller
         $kabarDesa = KabarDesaModel::where('status', 'published')
             ->latest('tgl_publish')
             ->take(3)
+            ->get();
+
+        $galeri = GaleriModel::where('status', 'published')
+            ->latest('created_at')
+            ->take(6)
             ->get();
 
         $suratTypes->transform(function ($item) {
@@ -59,7 +65,7 @@ class HomeController extends Controller
             return $item;
         });
 
-        return view('home', compact('suratTypes', 'kabarDesa'));
+        return view('home', compact('suratTypes', 'kabarDesa', 'galeri'));
     }
 
     // private function getKabarDesa()
