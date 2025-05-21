@@ -59,13 +59,15 @@ class SuratController extends Controller
     public function getFields($id)
     {
         $suratType = SubSuratTypeModel::findOrFail($id);
+        $fields = $this->getFieldsForSuratType($id);
+
 
         // Struktur data yang akan dikirimkan ke frontend
         $responseData = [
             'success' => true,
             'data' => [
                 'nama_surat' => $suratType->nama_sub_surat,
-                'fields' => $this->getFieldsForSuratType($id)
+                'fields' => $fields
             ]
         ];
 
@@ -74,8 +76,6 @@ class SuratController extends Controller
 
     private function getFieldsForSuratType($suratTypeId)
     {
-        // Ini bisa diubah sesuai dengan logika bisnis Anda
-        // Misalnya bisa diambil dari database atau didefinisikan statis
 
         $fields = [];
 

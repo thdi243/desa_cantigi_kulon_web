@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\FormSuratModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Storage;
 
 class SuratModel extends Model
 {
@@ -69,5 +70,10 @@ class SuratModel extends Model
     public function subSuratType(): BelongsTo
     {
         return $this->belongsTo(SubSuratTypeModel::class, 'sub_surat_type_id');
+    }
+
+    public function formSurat(): BelongsTo
+    {
+        return $this->belongsTo(FormSuratModel::class, 'form_id');
     }
 }
