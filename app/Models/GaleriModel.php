@@ -20,6 +20,8 @@ class GaleriModel extends Model
         'status',
         'kategori_id',
         'user_id',
+        'created_at',
+        'updated_at',
     ];
 
     // Relasi dengan kategori
