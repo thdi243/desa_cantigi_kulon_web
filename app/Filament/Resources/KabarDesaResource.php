@@ -120,7 +120,6 @@ class KabarDesaResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('kategori.nama_kategori')
                     ->label('Kategori')
-                    ->sortable()
                     ->searchable(),
             ])
             ->filters([

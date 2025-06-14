@@ -126,6 +126,7 @@ class PengaduanResource extends Resource
                     ->sortable()
                     ->dateTimeTooltip(),
                 TextColumn::make('status')
+                    ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'pending' => 'warning',
                         'process' => 'success',

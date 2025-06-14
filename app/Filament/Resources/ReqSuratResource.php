@@ -197,6 +197,7 @@ class ReqSuratResource extends Resource
                     }),
                 TextColumn::make('status')
                     ->label('Status')
+                    ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'pending' => 'warning',
                         'approved' => 'success',
@@ -213,6 +214,12 @@ class ReqSuratResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('print')
+                    ->label('Print')
+                    ->icon('heroicon-o-printer')
+                    ->color('info')
+                    ->url(fn($record) => route('surat.print', $record->id))
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

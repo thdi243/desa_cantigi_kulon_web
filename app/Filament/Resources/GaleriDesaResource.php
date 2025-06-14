@@ -72,6 +72,7 @@ class GaleriDesaResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->striped()
             ->columns([
                 Tables\Columns\TextColumn::make('No')->state(
                     static function (HasTable $livewire, stdClass $rowLoop): string {
