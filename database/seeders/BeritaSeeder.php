@@ -17,27 +17,32 @@ class BeritaSeeder extends Seeder
     {
         KategoriBeritaModel::insert([
             [
-                'nama_kategori' => 'Sosial',
+                'nama_kategori' => 'Smart People',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'nama_kategori' => 'Pemerintahan',
+                'nama_kategori' => 'Smart Economic',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'nama_kategori' => 'Ekonomi',
+                'nama_kategori' => 'Smart Environment',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'nama_kategori' => 'Pendidikan',
+                'nama_kategori' => 'Smart Government',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'nama_kategori' => 'Kesehatan',
+                'nama_kategori' => 'Smart Living',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'nama_kategori' => 'Smart Mobility',
                 'created_at' => now(),
                 'updated_at' => now()
             ]

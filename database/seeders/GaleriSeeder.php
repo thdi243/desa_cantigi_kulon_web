@@ -16,26 +16,38 @@ class GaleriSeeder extends Seeder
     {
         $kategori = [
             [
-                'nama_kategori' => 'Kegiatan Desa',
-                'slug' => 'kegiatan-desa',
+                'nama_kategori' => 'Smart People',
+                'slug' => 'smart-people',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'nama_kategori' => 'Gotong Royong',
-                'slug' => 'gotong-royong',
+                'nama_kategori' => 'Smart Economic',
+                'slug' => 'smart-economic',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'nama_kategori' => 'Budaya',
-                'slug' => 'budaya',
+                'nama_kategori' => 'Smart Environment',
+                'slug' => 'smart-environment',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'nama_kategori' => 'Pembangunan',
-                'slug' => 'pembangunan',
+                'nama_kategori' => 'Smart Government',
+                'slug' => 'smart-government',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nama_kategori' => 'Smart Living',
+                'slug' => 'smart-living',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nama_kategori' => 'Smart Mobility',
+                'slug' => 'smart-mobility',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
