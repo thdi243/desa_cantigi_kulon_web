@@ -33,7 +33,7 @@
         </div>
 
         <!-- Remember Me & Forgot Password -->
-        <div class="flex items-center justify-between mb-4">
+        {{-- <div class="flex items-center justify-between mb-4">
             <div class="flex items-center justify-center">
                 <label for="remember_me" class="ml-2 block text-sm text-gray-700">
                     <input id="remember_me" type="checkbox"
@@ -49,7 +49,7 @@
                 </a>
             @endif
 
-        </div>
+        </div> --}}
 
         <!-- Submit Button -->
         <div>

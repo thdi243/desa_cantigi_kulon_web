@@ -25,7 +25,7 @@
         </div>
 
         <!-- Bagian Form -->
-        <div class="relative container max-w-4xl mx-auto px-4 py-8 -mt-90 md:-mt-110">
+        <div class="relative container max-w-4xl mx-auto px-4 py-8 -mt-90 md:-mt-120">
             <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-white shadow-xl rounded-xl overflow-hidden">
                     <div class="px-6 py-8 sm:p-10">

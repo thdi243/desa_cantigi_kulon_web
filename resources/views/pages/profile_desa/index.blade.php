@@ -41,41 +41,118 @@
     <!-- Hero Section -->
     <section id="home">
         <div class="relative">
-            <div class="h-[50vh] md:h-[70vh] lg:h-[100vh] overflow-hidden">
+            <div class="h-[70vh] sm:h-[50vh] md:h-[70vh] lg:h-[100vh] overflow-hidden">
                 <img class="w-full h-full object-cover" src="{{ asset('images/background_home.jpg') }}" alt="Background Hero">
             </div>
             <div class="absolute inset-0 bg-black opacity-60"></div>
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-                <h6 class="text-2xl text-white font-medium">
-                    Welcome To!
-                </h6>
-                <h1 class="text-2xl md:text-[130px] text-white font-bold font-caveat">
-                    Desa Cantigi Kulon
-                </h1>
-                <h4 class="text-3xl text-white font-medium text-center">
-                    Maha Loka Dharma
-                </h4>
+            <!-- Content Container -->
+            <div class="absolute inset-0 flex items-center justify-center px-4 sm:px-6 md:px-10">
+                <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <!-- Left: Text Content -->
+                    <div class="text-center lg:text-left order-2 lg:order-1">
+                        <h4
+                            class="text-2xl sm:text-3xl md:text-5xl lg:text-7xl text-white font-caveat font-bold mb-4 md:mb-6 leading-tight">
+                            Maha Loka Dharma
+                        </h4>
+                        <p class="text-white/90 text-base sm:text-lg md:text-xl max-w-md mx-auto lg:mx-0 leading-relaxed">
+                            Membangun desa yang maju, sejahtera, dan berkarakter bersama masyarakat yang gotong royong.
+                        </p>
+                    </div>
+                    <!-- Right: Kepala Desa Circle Photo -->
+                    <div class="flex justify-center lg:justify-end order-1 lg:order-2 mb-6 lg:mb-0">
+                        <div class="relative px-10">
+                            <!-- Outer decorative ring -->
+                            <div
+                                class="hidden sm:block w-40 h-40 md:w-85 md:h-85 rounded-full border-4 border-white/20 absolute inset-0 animate-pulse">
+                            </div>
+                            <!-- Main photo container -->
+                            <div class="relative w-32 h-32 md:w-75 md:h-75 mx-auto">
+                                <!-- Photo circle with gradient border -->
+                                <div
+                                    class="w-full h-full rounded-full p-1 sm:p-2 bg-gradient-to-br from-emerald-500 via-emerald-700 to-emerald-800 shadow-2xl overflow-hidden">
+                                    <img class="w-full h-full rounded-full object-cover border-2 sm:border-4 border-white object-[center_20%]"
+                                        src="{{ asset('images/kepala-desa.png') }}" alt="Kepala Desa">
+                                </div>
+                                <!-- Floating info card -->
+                                <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                                    <div
+                                        class="bg-white rounded-2xl shadow-xl px-4 py-2 sm:px-6 sm:py-4 text-center min-w-max">
+                                        <h3 class="text-gray-800 font-bold text-base sm:text-lg">Chaerotunnisa, S.Pd.I</h3>
+                                        <p class="text-emerald-700 font-semibold text-xs sm:text-sm">Kuwu Desa</p>
+                                        <p class="text-gray-500 text-xs">Periode 2019-2025</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Decorative floating elements -->
+                            <div
+                                class="hidden sm:block absolute top-4 -right-2 w-4 h-4 md:w-6 md:h-6 bg-orange-400 rounded-full opacity-80 animate-bounce">
+                            </div>
+                            <div class="hidden sm:block absolute -top-2 left-8 w-3 h-3 md:w-4 md:h-4 bg-blue-400 rounded-full opacity-60 animate-bounce"
+                                style="animation-delay: 0.5s;"></div>
+                            <div class="hidden sm:block absolute bottom-8 -left-4 w-3.5 h-3.5 md:w-5 md:h-5 bg-yellow-400 rounded-full opacity-70 animate-bounce"
+                                style="animation-delay: 1s;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Grafik Statistik desa --}}
+    <section id="grafik-statistik" class="bg-white pt-10 px-20">
+        <div class="container mx-auto px-4">
+            {{-- <h2 class="text-4xl font-bold text-center mb-10 text-white">Grafik Statistik Desa Cantigi Kulon</h2> --}}
+            <!-- Statistik Utama -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-3xl font-bold text-[#40916C] mb-2">5,102</div>
+                    <div class="text-gray-600 text-sm">Total Penduduk</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-3xl font-bold text-[#40916C] mb-2">2,590 </div>
+                    <div class="text-gray-600 text-sm">Laki-laki</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-3xl font-bold text-[#40916C] mb-2">2,512 </div>
+                    <div class="text-gray-600 text-sm">Perempuan</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-3xl font-bold text-[#40916C] mb-2">468</div>
+                    <div class="text-gray-600 text-sm">Kepala Keluarga</div>
+                </div>
             </div>
         </div>
     </section>
 
     {{-- sejarah section --}}
     <section id="sejarah">
-        <div class="container mx-auto py-20 px-20">
+        <div class="container mx-auto pb-20 px-20">
             <h2 class="text-4xl font-bold text-center mb-10 text-[#2D6A4F]">Sejarah Desa Cantigi Kulon</h2>
-            <p class="text-lg text-justify mb-5">
-                Desa Cantigi Kulon adalah sebuah desa yang terletak di Kecamatan Cantigi, Kabupaten Indramayu, Jawa Barat.
-                Desa ini memiliki sejarah yang kaya dan beragam, yang mencerminkan perjalanan panjang masyarakatnya.
+            <p class="text-lg text-left mb-5">
+                Konon kabarnya Desa Cantigi Kulon semenjak masa penjajahan belanda kepemimpinan desa cantigi kulon ini masih
+                belum jelas dan daerahnya pun masih belum tersusun dengan baik kondisinya masih belum terbentuk, sehingga
+                dijadikan tempat persembunyian orang-orang belanda, pada suatu kejadian konon diwilayah desa ini ada wilayah
+                yang namanya” Wilayah Kali Anyar” suatu hari bangsa belanda mencari musuhnya dan menanyakan sebagian
+                penduduk tentang musuh yang dicarinya sehingga penduduk desa kita menjawab dan menunjukan persembunyiannya
+                orang yang mereka cari,namun belanda pada saat itu salah dengar kalau informasi yang mereka dengar adalah
+                kali anya bukan rumah anyar (Rumah Baru). Maka keesokan harinya rumah baru yang ada dikampung kita ini
+                dihancurkan semua tidak ada yang tersisa sehingga masyarakat kita banyak yang korban.
             </p>
-            <p class="text-lg text-justify mb-5">
-                Sejak zaman dahulu, Desa Cantigi Kulon telah menjadi pusat kegiatan pertanian dan perdagangan.
-                Masyarakatnya dikenal sebagai petani yang ulet dan pekerja keras, serta memiliki kearifan lokal yang tinggi.
+            <p class="text-lg text-left mb-5">
+                Dan sejak saat itulah masa penjajahan belanda dikalahkan oleh pasukan penjajah jepang, orang-orang kita
+                menyusun startegi untuk mengusir penjajah jepang dan akhirnya jepang pun dapat dikalahkan.Semenjak itulah
+                maka masyarakat kita mengadakan musyawarah untuk mencari kepemimpinan desa ini, akhirnya dengan singkat
+                terpilih kepala Desa yang pertama yang dipimpin oleh seorang kuwu Taryana, maka dibentuklah kepengurusan
+                aparat desa sebagai pengurus desa pertama.
             </p>
-            <p class="text-lg text-justify mb-5">
+            {{-- <p class="text-lg text-justify mb-5">
                 Dalam perkembangannya, Desa Cantigi Kulon juga mengalami berbagai perubahan sosial dan budaya.
                 Masyarakatnya terus beradaptasi dengan perkembangan zaman, sambil tetap menjaga tradisi dan nilai-nilai
-                luhur yang diwariskan oleh nenek moyang.
-            </p>
+                luhur yang diwariskan oleh nenek moyang. --}}
+            {{-- </p> --}}
         </div>
     </section>
 
@@ -106,7 +183,7 @@
     {{-- demografi section --}}
     <section id="demografi" class="bg-gray-100 py-20 px-20">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 flex items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 items-center">
                 <div>
                     <img class="w-70 md:order-last mx-auto" src="{{ asset('images/demografi.png') }}" alt="Demografi Desa">
                 </div>
@@ -123,14 +200,6 @@
                         <li>Barat: Desa Cantigi Wetan</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- Grafik Statistik desa --}}
-    <section id="grafik-statistik" class="bg-[#40916C] py-20 px-20">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text">
             </div>
         </div>
     </section>
@@ -173,7 +242,8 @@
         <div class="container mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-30 text-[#2D6A4F]">Makna Logo Desa</h2>
             <div class="flex justify-center">
-                <img class="w-3/4 h-auto" src="{{ asset('images/logo_makna.png') }}" alt="Logo Desa Cantigi Kulon">
+                <img class="w-full md:w-3/4 h-auto" src="{{ asset('images/logo_makna.png') }}"
+                    alt="Logo Desa Cantigi Kulon">
             </div>
             {{-- <p class="text-lg text-center mt-5">
                 Logo Desa Cantigi Kulon melambangkan identitas dan semangat masyarakat desa dalam menjaga tradisi dan
@@ -200,19 +270,19 @@
                         <circle cx="105" cy="185" r="25" />
                     </clipPath>
                     <clipPath id="circleClip4">
-                        <circle cx="445" cy="345" r="20" />
+                        <circle cx="375" cy="345" r="20" />
                     </clipPath>
                     <clipPath id="circleClip5">
-                        <circle cx="675" cy="345" r="20" />
+                        <circle cx="575" cy="345" r="20" />
                     </clipPath>
                     <clipPath id="circleClip6">
-                        <circle cx="900" cy="345" r="20" />
+                        <circle cx="775" cy="345" r="20" />
                     </clipPath>
                     <clipPath id="circleClip7">
-                        <circle cx="565" cy="475" r="20" />
+                        <circle cx="470" cy="475" r="20" />
                     </clipPath>
                     <clipPath id="circleClip8">
-                        <circle cx="790" cy="475" r="20" />
+                        <circle cx="675" cy="475" r="20" />
                     </clipPath>
                     <clipPath id="circleClip9">
                         <circle cx="95" cy="625" r="20" />
@@ -222,6 +292,9 @@
                     </clipPath>
                     <clipPath id="circleClip11">
                         <circle cx="465" cy="625" r="20" />
+                    </clipPath>
+                    <clipPath id="circleClip12">
+                        <circle cx="885" cy="475" r="20" />
                     </clipPath>
 
                     <!-- Instagram Icon -->
@@ -327,55 +400,55 @@
                 <line x1="675" y1="280" x2="675" y2="320" stroke="#d1d5db" stroke-width="1" />
 
                 <!-- Garis Horizontal untuk KAUR -->
-                <line x1="445" y1="320" x2="900" y2="320" stroke="#d1d5db" stroke-width="1" />
+                <line x1="375" y1="320" x2="885" y2="320" stroke="#d1d5db" stroke-width="1" />
 
                 <!-- Garis Vertikal ke masing-masing KAUR -->
-                <line x1="445" y1="320" x2="445" y2="350" stroke="#d1d5db" stroke-width="1" />
-                <line x1="675" y1="320" x2="675" y2="350" stroke="#d1d5db" stroke-width="1" />
-                <line x1="900" y1="320" x2="900" y2="350" stroke="#d1d5db" stroke-width="1" />
+                <line x1="375" y1="320" x2="375" y2="350" stroke="#d1d5db" stroke-width="1" />
+                <line x1="575" y1="320" x2="575" y2="350" stroke="#d1d5db" stroke-width="1" />
+                <line x1="775" y1="320" x2="775" y2="350" stroke="#d1d5db" stroke-width="1" />
 
                 <!-- KAUR Pemerintahan -->
-                <rect x="370" y="350" width="140" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
+                <rect x="300" y="350" width="140" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
                     rx="15" ry="15" filter="url(#shadow)" />
-                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="425" y="325" width="40"
+                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="355" y="325" width="40"
                     height="40" clip-path="url(#circleClip4)" />
                 {{-- <circle cx="400" cy="350" r="20" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1" /> --}}
-                <text x="445" y="385" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
+                <text x="370" y="385" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
                     fill="#4b5563">Maulana Yusuf</text>
-                <text x="445" y="400" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kaur
+                <text x="370" y="400" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kaur
                     Pemerintahan</text>
                 <a href="https://www.instagram.com/thdi.24/" target="_blank">
-                    <use href="#instagram-icon" x="435" y="410" width="17" height="17" fill="#E1306C"
+                    <use href="#instagram-icon" x="370" y="410" width="17" height="17" fill="#E1306C"
                         class="social-icon" />
                 </a>
 
                 <!-- KAUR Keuangan -->
-                <rect x="600" y="350" width="150" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
+                <rect x="500" y="350" width="150" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
                     rx="15" ry="15" filter="url(#shadow)" />
-                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="655" y="325" width="40"
+                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="555" y="325" width="40"
                     height="40" clip-path="url(#circleClip5)" />
                 {{-- <circle cx="635" cy="350" r="20" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1" /> --}}
-                <text x="675" y="385" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
+                <text x="575" y="385" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
                     fill="#4b5563">Ikwanudin, S.Sos.</text>
-                <text x="675" y="400" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kaur
+                <text x="575" y="400" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kaur
                     Keuangan</text>
                 <a href="https://www.instagram.com/thdi.24/" target="_blank">
-                    <use href="#instagram-icon" x="665" y="410" width="17" height="17" fill="#E1306C"
+                    <use href="#instagram-icon" x="565" y="410" width="17" height="17" fill="#E1306C"
                         class="social-icon" />
                 </a>
 
                 <!-- KAUR Umum -->
-                <rect x="960" y="350" width="150" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
+                <rect x="840" y="350" width="150" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
                     rx="15" ry="15" transform="translate(-140, 0)" filter="url(#shadow)" />
-                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="880" y="325" width="40"
+                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="755" y="325" width="40"
                     height="40" clip-path="url(#circleClip6)" />
                 {{-- <circle cx="850" cy="350" r="20" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1" /> --}}
-                <text x="900" y="385" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
+                <text x="775" y="385" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
                     fill="#4b5563">Ahmad Wahyudin</text>
-                <text x="900" y="400" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kaur
+                <text x="775" y="400" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kaur
                     Umum</text>
                 <a href="https://www.instagram.com/thdi.24/" target="_blank">
-                    <use href="#instagram-icon" x="890" y="410" width="17" height="17" fill="#E1306C"
+                    <use href="#instagram-icon" x="770" y="410" width="17" height="17" fill="#E1306C"
                         class="social-icon" />
                 </a>
 
@@ -383,36 +456,52 @@
                 {{-- <line x1="565" y1="450" x2="790" y2="450" stroke="#d1d5db" stroke-width="1" /> --}}
 
                 <!-- Garis Vertikal ke masing-masing KAUR level 2 -->
-                <line x1="565" y1="320" x2="565" y2="480" stroke="#d1d5db" stroke-width="1" />
-                <line x1="790" y1="320" x2="790" y2="480" stroke="#d1d5db" stroke-width="1" />
+                <line x1="470" y1="320" x2="470" y2="480" stroke="#d1d5db" stroke-width="1" />
+                <line x1="675" y1="320" x2="675" y2="480" stroke="#d1d5db" stroke-width="1" />
+                <line x1="885" y1="320" x2="885" y2="480" stroke="#d1d5db" stroke-width="1" />
 
                 <!-- KAUR Kesra -->
-                <rect x="495" y="480" width="140" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
+                <rect x="400" y="480" width="140" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
                     rx="15" ry="15" filter="url(#shadow)" />
-                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="545" y="455" width="40"
+                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="450" y="455" width="40"
                     height="40" clip-path="url(#circleClip7)" />
                 {{-- <circle cx="520" cy="480" r="20" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1" /> --}}
-                <text x="565" y="515" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
+                <text x="470" y="515" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
                     fill="#4b5563">Islah</text>
-                <text x="565" y="530" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kaur
+                <text x="470" y="530" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kaur
                     Kesra</text>
                 <a href="https://www.instagram.com/thdi.24/" target="_blank">
-                    <use href="#instagram-icon" x="555" y="540" width="17" height="17" fill="#E1306C"
+                    <use href="#instagram-icon" x="460" y="540" width="17" height="17" fill="#E1306C"
                         class="social-icon" />
                 </a>
 
                 <!-- KAUR Pembangunan -->
-                <rect x="805" y="480" width="140" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
+                <rect x="690" y="480" width="140" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
                     rx="15" ry="15" transform="translate(-85, 0)" filter="url(#shadow)" />
-                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="770" y="455" width="40"
+                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="655" y="455" width="40"
                     height="40" clip-path="url(#circleClip8)" />
                 {{-- <circle cx="750" cy="480" r="20" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1" /> --}}
-                <text x="790" y="515" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
+                <text x="675" y="515" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
                     fill="#4b5563">Wasna</text>
-                <text x="790" y="530" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kaur
+                <text x="675" y="530" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kaur
                     Pembangunan</text>
                 <a href="https://www.instagram.com/thdi.24/" target="_blank">
-                    <use href="#instagram-icon" x="780" y="540" width="17" height="17" fill="#E1306C"
+                    <use href="#instagram-icon" x="670" y="540" width="17" height="17" fill="#E1306C"
+                        class="social-icon" />
+                </a>
+
+                <!-- Kasi Pelayanan -->
+                <rect x="900" y="480" width="140" height="90" fill="white" stroke="#d1d5db" stroke-width="2"
+                    rx="15" ry="15" transform="translate(-85, 0)" filter="url(#shadow)" />
+                <image href="{{ asset('images/icons/avatar-struktur-01.png') }}" x="865" y="455" width="40"
+                    height="40" clip-path="url(#circleClip12)" />
+                {{-- <circle cx="750" cy="480" r="20" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1" /> --}}
+                <text x="885" y="515" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
+                    fill="#4b5563">Kasan Kariri</text>
+                <text x="885" y="530" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kasi
+                    Pelayanan</text>
+                <a href="https://www.instagram.com/thdi.24/" target="_blank">
+                    <use href="#instagram-icon" x="880" y="540" width="17" height="17" fill="#E1306C"
                         class="social-icon" />
                 </a>
 
@@ -447,7 +536,7 @@
                     height="40" clip-path="url(#circleClip10)" />
                 {{-- <circle cx="205" cy="590" r="20" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1" /> --}}
                 <text x="275" y="665" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle"
-                    fill="#4b5563">Rumidi</text>
+                    fill="#4b5563">Achmad Farhan</text>
                 <text x="275" y="680" font-family="Arial" font-size="10" text-anchor="middle" fill="#6b7280">Kepala
                     Dusun</text>
                 <a href="https://www.instagram.com/thdi.24/" target="_blank">

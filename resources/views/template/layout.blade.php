@@ -11,6 +11,11 @@
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/solid.css">
 
+        {{-- AOS --}}
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
         @vite('resources/css/app.css')
         @yield('style')
     </head>
@@ -28,6 +33,11 @@
 
         @yield('script')
 
+        {{-- AOS --}}
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
     </body>
 
 </html>

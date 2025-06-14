@@ -27,41 +27,46 @@
 
     <!-- Pelayanan Section -->
     <section id="pelayanan" class="py-10 md:py-16 mt-10">
-        <div class="bg-[#FFFDF7] px-4 md:px-7 lg:px-9">
-            <h1 class="text-[#676767] font-bold text-center text-2xl md:text-4xl mb-2">Pelayanan Kami</h1>
-            <h5 class="text-[#676767] font-medium text-center text-xs md:text-sm">Layanan Terbaik untuk Kebutuhan
-                Masyarakat Desa</h5>
+        <div class="container mx-auto px-10">
+            <div class="bg-[#FFFDF7] px-4 md:px-7 lg:px-9">
+                <div class="container mx-auto" data-aos="fade-up" data-aos-duration="1200">
+                    <h1 class="text-[#676767] font-bold text-center text-2xl md:text-4xl mb-2">Pelayanan Surat</h1>
+                    <h5 class="text-[#676767] font-medium text-center text-xs md:text-sm">Layanan Terbaik untuk Kebutuhan
+                        Masyarakat Desa</h5>
+                </div>
+                <!-- Cards Container -->
+                <div class="mx-auto gap-6 mt-6 md:mt-10 py-6 md:py-12 flex flex-col items-center">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-15 md:justify-center">
+                        @foreach ($suratTypes->take(3) as $index => $suratType)
+                            <!-- Card -->
+                            <div class="bg-white rounded-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden text-center md:text-start"
+                                data-aos="fade-up" data-aos-duration="1200" data-aos-delay="{{ $index * 200 }}">
+                                <div class="p-4 md:p-6">
+                                    <!-- Icon -->
+                                    <div style="background-color: {{ $suratType->bg_color }};"
+                                        class="w-12 h-12 md:w-16 md:h-16 rounded-xl flex items-center justify-center mb-3 md:mb-4 mx-auto md:mx-0">
+                                        <span style="color: {{ $suratType->text_color }};"><i
+                                                class="uil {{ $suratType->icon }} text-3xl md:text-5xl"></i></span>
+                                    </div>
 
-            <!-- Cards Container -->
-            <div class="mx-auto gap-6 mt-6 md:mt-10 py-6 md:py-12 flex flex-col items-center">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-15 md:justify-center">
-                    @foreach ($suratTypes->take(3) as $suratType)
-                        <!-- Card -->
-                        <div
-                            class="bg-white rounded-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden text-center md:text-start">
-                            <div class="p-4 md:p-6">
-                                <!-- Icon -->
-                                <div style="background-color: {{ $suratType->bg_color }};"
-                                    class="w-12 h-12 md:w-16 md:h-16 rounded-xl flex items-center justify-center mb-3 md:mb-4 mx-auto md:mx-0">
-                                    <span style="color: {{ $suratType->text_color }};"><i
-                                            class="uil {{ $suratType->icon }} text-3xl md:text-5xl"></i></span>
-                                </div>
+                                    <h3 class="text-lg md:text-xl font-bold text-[#676767] mb-2">
+                                        {{ $suratType->nama_surat }}
+                                    </h3>
+                                    <p class="text-[#676767] text-sm md:text-base mb-4 md:mb-6">
+                                        {{ $suratType->description }}
+                                    </p>
 
-                                <h3 class="text-lg md:text-xl font-bold text-[#676767] mb-2">{{ $suratType->nama_surat }}
-                                </h3>
-                                <p class="text-[#676767] text-sm md:text-base mb-4 md:mb-6">{{ $suratType->description }}
-                                </p>
-
-                                <!-- Button -->
-                                <div>
-                                    <a href="{{ $suratType->route }}"
-                                        class="inline-block px-4 py-2 md:px-6 md:py-2 bg-orange-300 text-white text-sm md:text-base rounded-md hover:bg-orange-500 transition-colors duration-300">
-                                        Ajukan Sekarang
-                                    </a>
+                                    <!-- Button -->
+                                    <div>
+                                        <a href="{{ $suratType->route }}"
+                                            class="inline-block px-4 py-2 md:px-6 md:py-2 bg-orange-300 text-white text-sm md:text-base rounded-md hover:bg-orange-500 transition-colors duration-300">
+                                            Ajukan Sekarang
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,7 +77,8 @@
         <div class="container mx-auto px-4 md:px-6 lg:px-8 flex flex-col items-center">
             <div class="flex flex-col md:flex-row items-center justify-between gap-20 md:gap-25">
                 <!-- Left column - Text content -->
-                <div class="w-full md:w-1/2 space-y-4 text-center md:text-left">
+                <div class="w-full md:w-1/2 space-y-4 text-center md:text-left" data-aos="fade-right"
+                    data-aos-duration="1200">
                     <h1 class="text-2xl md:text-4xl font-bold text-white">Profil Desa</h1>
 
                     <h5 class="text-white font-medium text-xs md:text-sm mb-4 md:mb-6">
@@ -88,7 +94,7 @@
                 </div>
 
                 <!-- Right column - Image -->
-                <div class="w-full md:w-1/2 flex justify-center">
+                <div class="w-full md:w-1/2 flex justify-center" data-aos="fade-left" data-aos-duration="1200">
                     <div class="rounded-lg overflow-hidden w-full max-w-xs md:max-w-md">
                         <img src="{{ asset('images/profil-desa.png') }}" alt="icon profil desa"
                             class="w-full h-auto object-contain" />
@@ -102,14 +108,16 @@
     <section id="pengaduan" class="bg-[#FFFDF7] py-10 md:py-16 mt-15">
         <div class="mx-auto px-4 md:px-6 lg:px-8 flex flex-col items-center">
             <div class="flex flex-col md:flex-row items-center justify-between gap-15 md:gap-20">
-                <div class="w-full md:w-1/2 flex justify-center order-2 md:order-1">
+                <div class="w-full md:w-1/2 flex justify-center order-2 md:order-1" data-aos="fade-right"
+                    data-aos-duration="1200">
                     <div class="rounded-lg overflow-hidden w-full max-w-xs md:max-w-md">
                         <img src="{{ asset('images/pengaduan.png') }}" alt="icon pengaduan"
                             class="w-full h-auto object-cover" />
                     </div>
                 </div>
 
-                <div class="w-full md:w-1/2 space-y-4 text-center md:text-left order-1 md:order-2">
+                <div class="w-full md:w-1/2 space-y-4 text-center md:text-left order-1 md:order-2" data-aos="fade-left"
+                    data-aos-duration="1200">
                     <h1 class="text-2xl md:text-4xl font-bold text-[#676767]">Ayo Mengadu</h1>
 
                     <h5 class="text-[#676767] font-medium text-xs md:text-sm mb-4 md:mb-6">
@@ -127,10 +135,10 @@
         </div>
     </section>
 
-    <!-- Berita Desa Section -->
+    <!-- Kabar Desa Section -->
     <section id="kabar-desa" class="bg-[#FFFDF7] py-16 mt-15">
         <div class="container mx-auto px-10">
-            <div class="text-center mb-12">
+            <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1200">
                 <h2 class="text-4xl font-bold text-[#676767] mb-4">Kabar Desa</h2>
                 <p class="text-[#676767] max-w-2xl mx-auto">
                     Tetap terhubung dengan perkembangan terkini di Desa Cantigi Kulon. Simak berbagai berita dan
@@ -141,7 +149,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach ($kabarDesa as $berita)
-                    <div class="bg-white rounded-lg overflow-hidden transition duration-300 hover:shadow-lg">
+                    <div class="bg-white rounded-lg overflow-hidden transition duration-300 hover:shadow-lg"
+                        data-aos="fade-up" data-aos-duration="1200" data-aos-delay="{{ $loop->index * 200 }}">
                         <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->title }}"
                             class="w-full h-48 object-cover" />
                         <div class="p-6">
@@ -165,7 +174,7 @@
                 @endforeach
             </div>
 
-            <div class="text-center mt-12">
+            <div class="text-center mt-12" data-aos="fade-up" data-aos-duration="1200">
                 <a href="{{ route('kabar-desa.index') }}" target="_blank"
                     class="bg-sky-700 text-white py-3 px-8 rounded-lg hover:bg-sky-800 transition duration-300 inline-flex items-center">
                     Lihat Berita Lainnya
@@ -178,7 +187,7 @@
     <!-- Galeri Desa Section -->
     <section class="galeri-desa bg-[#FFFDF7] py-16 mt-10">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
+            <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1200">
                 <h2 class="text-4xl font-bold text-[#676767] mb-4">Galeri Desa</h2>
                 <p class="text-[#676767] max-w-2xl mx-auto">
                     Jelajahi momen-momen indah dan kegiatan bermakna di Desa Cantigi Kulon melalui koleksi foto kami.
@@ -187,7 +196,8 @@
 
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 @foreach ($galeri as $item)
-                    <div class="gallery-item group relative overflow-hidden rounded-lg">
+                    <div class="gallery-item group relative overflow-hidden rounded-lg" data-aos="zoom-in"
+                        data-aos-duration="1200" data-aos-delay="{{ $loop->index * 200 }}">
                         <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}"
                             class="w-full h-48 md:h-64 object-cover transition duration-300 group-hover:scale-110" />
                         <div
@@ -201,7 +211,7 @@
                 @endforeach
             </div>
 
-            <div class="text-center mt-12">
+            <div class="text-center mt-12" data-aos="fade-up" data-aos-duration="1200">
                 <a href="{{ route('galeri') }}" target="_blank"
                     class="bg-sky-700 text-white py-3 px-8 rounded-lg hover:bg-sky-800 transition duration-300 inline-flex items-center">
                     Lihat Galeri Lainnya

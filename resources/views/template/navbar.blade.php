@@ -14,6 +14,28 @@
                         class="link text-white hover:text-orange-300 px-3 py-2 rounded-md text-sm font-medium">Beranda</a>
                     <a href="#pelayanan"
                         class="link text-white hover:text-orange-300 px-3 py-2 rounded-md text-sm font-medium">Pelayanan</a>
+                    <!-- DROPDOWN SIMPLE -->
+                    <div class="relative group">
+                        <button
+                            class="btn-link text-white hover:text-orange-300 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                            Informasi
+                            <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <!-- Pake padding biar ga ilang -->
+                        <div class="absolute left-0 pt-2 w-40 invisible group-hover:visible">
+                            <div class="link bg-white rounded-md shadow-lg py-1">
+                                <a href="{{ route('kabar-desa.index') }}"
+                                    class=" block px-4 py-2 text-sm text-white-700 hover:bg-gray-100">Kabar
+                                    Desa</a>
+                                <a href="{{ route('galeri') }}"
+                                    class=" block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Galeri
+                                    Desa</a>
+                            </div>
+                        </div>
+                    </div>
                     <a href="{{ route('profile-desa') }}"
                         class="link text-white hover:text-orange-300 px-3 py-2 rounded-md text-sm font-medium">Profil
                         Desa</a>
@@ -35,10 +57,10 @@
                                     <!-- Dropdown menu (hidden by default) -->
                                     <div id="profile-dropdown-menu"
                                         class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                                        <a href="{{ route('profile.edit') }}"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+                                        {{-- <a href="{{ route('profile.edit') }}"
+                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a> --}}
+                                        {{-- <a href="#"
+                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a> --}}
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <button type="submit"
@@ -73,103 +95,88 @@
             <!-- Mobile menu button -->
             <div class="flex md:hidden items-center">
                 <button type="button" id="mobile-menu-button"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
                     aria-controls="mobile-menu" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <!-- Icon when menu is closed -->
-                    <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" aria-hidden="true">
+                    <svg class="block h-6 w-6" id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                     <!-- Icon when menu is open -->
-                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" aria-hidden="true">
+                    <svg class="hidden h-6 w-6" id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
+        </div>
+    </div>
 
-            <!-- Mobile menu, show/hide based on menu state. -->
-            <div class="md:hidden hidden" id="mobile-menu">
-                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <a href="#home"
-                        class="text-white hover:text-orange-300 block px-3 py-2 rounded-md text-base font-medium">Beranda</a>
-                    <a href="#pelayanan"
-                        class="text-white hover:text-orange-300 block px-3 py-2 rounded-md text-base font-medium">Pelayanan</a>
-                    <a href="#profil-desa"
-                        class="text-white hover:text-orange-300 block px-3 py-2 rounded-md text-base font-medium">Profil
-                        Desa</a>
-                    <a href="#pengaduan"
-                        class="text-white hover:text-orange-300 block px-3 py-2 rounded-md text-base font-medium">Pengaduan</a>
-                </div>
-                <div class="pt-4 pb-3 border-t border-gray-200">
-                    @auth
-                        <!-- User is authenticated, show profile info -->
-                        <div class="flex items-center px-5">
-                            <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full object-cover"
-                                    src="{{ auth()->user()->profile_photo_url ?? asset('images/default-avatar.png') }}"
-                                    alt="Profile Photo">
-                            </div>
-                            <div class="ml-3">
-                                <div class="text-base font-medium text-white">{{ auth()->user()->name }}</div>
-                            </div>
-                        </div>
-                        <div class="mt-3 px-2 space-y-1">
-                            {{-- <a href="{{ route('profile.show') }}" --}}
-                            <a href="#"
-                                class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-orange-300">
-                                Profile
-                            </a>
-                            {{-- <a href="{{ route('dashboard') }}" --}}
-                            <a href="#"
-                                class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-orange-300">
-                                Dashboard
-                            </a>
+    <!-- Mobile menu (HANYA SATU, dengan background yang proper) -->
+    <div class="md:hidden hidden bg-white" id="mobile-menu">
+        <!-- Navigation Links -->
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="{{ route('home') }}"
+                class="text-gray-800 hover:text-gray-500 hover:bg-gray-200 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200">Beranda</a>
+            <a href="{{ route('home') }}"
+                class="text-gray-800 hover:text-gray-500 hover:bg-gray-200 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200">Pelayanan</a>
+            <a href="{{ route('profile-desa') }}"
+                class="text-gray-800 hover:text-gray-500 hover:bg-gray-200 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200">Profil
+                Desa</a>
+            <a href="{{ route('pengaduan.create') }}"
+                class="text-gray-800 hover:text-gray-500 hover:bg-gray-200 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200">Pengaduan</a>
+        </div>
+
+        <!-- User Section -->
+        <div class="pt-4 pb-3">
+            <!-- Jika user sudah login (contoh dengan user) -->
+            @auth
+                <!-- User is authenticated, show profile info with dropdown -->
+                <div class="flex items-center px-5 relative">
+                    <div class="flex-shrink-0">
+                        <img class="h-10 w-10 rounded-full object-cover"
+                            src="{{ auth()->user()->profile_photo_url ?? asset('images/icons/default-avatar.svg') }}"
+                            alt="Profile Photo">
+                    </div>
+                    <div class="ml-3">
+                        <button id="mobile-profile-dropdown-btn" type="button"
+                            class="flex items-center text-base font-medium text-gray-800 focus:outline-none">
+                            {{ auth()->user()->name }}
+                            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="mobile-profile-dropdown-menu"
+                            class="hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                            <a href="{{ route('profile.edit') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                            {{-- <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a> --}}
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
-                                    class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-orange-300">
+                                    class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Logout
                                 </button>
                             </form>
                         </div>
-                    @else
-                        <!-- User is not authenticated, show login/register buttons -->
-                        <div class="flex items-center px-5">
-                            <a href="{{ route('login') }}" target="_blank" id="login-button"
-                                class="block px-4 py-2 text-base font-medium text-white outline-1 rounded-md hover:text-orange-300">Masuk</a>
-                            <a href="{{ route('register') }}" target="_blank" id="register-button"
-                                class="block ml-3 px-4 py-2 text-base font-medium text-white bg-orange-300 hover:bg-orange-400 0 rounded-md">Daftar</a>
-                        </div>
-                    @endauth
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden hidden" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="#home"
-                class="text-white hover:text-orange-300 block px-3 py-2 rounded-md text-base font-medium">Beranda</a>
-            <a href="#pelayanan"
-                class="text-white hover:text-orange-300 block px-3 py-2 rounded-md text-base font-medium">Pelayanan</a>
-            <a href="#profil-desa"
-                class="text-white hover:text-orange-300 block px-3 py-2 rounded-md text-base font-medium">Profil
-                Desa</a>
-            <a href="#pengaduan"
-                class="text-white hover:text-orange-300 block px-3 py-2 rounded-md text-base font-medium">Pengaduan</a>
-        </div>
-        <div class="pt-4 pb-3 border-t border-gray-200">
-            <div class="flex items-center px-5">
-                <a href="{{ route('login') }}" target="_blank" id="login-button"
-                    class="block px-4 py-2 text-base font-medium text-white outline-1 rounded-md hover:text-orange-300">Masuk</a>
-                <a href="{{ route('register') }}" target="_blank" id="register-button"
-                    class="block ml-3 px-4 py-2 text-base font-medium text-white bg-orange-300 hover:bg-orange-400 0 rounded-md">Daftar</a>
-            </div>
+            @else
+                <div class="guest-user">
+                    <div class="flex flex-col space-y-2 px-5">
+                        <a href="{{ route('login') }}"
+                            class="block px-4 py-2 text-base font-medium text-gray-800 border border-gray-500 rounded-md hover:text-orange-300 hover:border-orange-300 text-center transition-colors duration-200">Masuk</a>
+                        <a href="{{ route('register') }}"
+                            class="block px-4 py-2 text-base font-medium text-white bg-orange-400 hover:bg-orange-500 rounded-md text-center transition-colors duration-200">Daftar</a>
+                    </div>
+                </div>
+            @endauth
         </div>
     </div>
 </nav>
@@ -258,6 +265,14 @@
                     });
                 }
 
+                const navBtnLink = navbar.querySelectorAll('button.btn-link');
+                if (navBtnLink.length > 0) {
+                    navBtnLink.forEach(btnLink => {
+                        btnLink.classList.remove('text-white');
+                        btnLink.classList.add('text-gray-800');
+                    });
+                }
+
                 const btnAuth = navbar.querySelectorAll('a.btn-auth');
                 if (btnAuth.length > 0) {
                     btnAuth.forEach(btn => {
@@ -290,6 +305,14 @@
                     navLinks.forEach(link => {
                         link.classList.add('text-white');
                         link.classList.remove('text-gray-800');
+                    });
+                }
+
+                const navBtnLink = navbar.querySelectorAll('button.btn-link');
+                if (navBtnLink.length > 0) {
+                    navBtnLink.forEach(btnLink => {
+                        btnLink.classList.add('text-white');
+                        btnLink.classList.remove('text-gray-800');
                     });
                 }
 
@@ -345,24 +368,68 @@
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         });
 
-        // Toggle menu mobile
+        // Mobile menu toggle
+        // const mobileMenuButton = document.getElementById('mobile-menu-button');
+        // const mobileMenu = document.getElementById('mobile-menu');
+        const menuOpenIcon = document.getElementById('menu-open-icon');
+        const menuCloseIcon = document.getElementById('menu-close-icon');
+
         mobileMenuButton.addEventListener('click', function() {
             const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
             mobileMenuButton.setAttribute('aria-expanded', !expanded);
 
-            // Toggle icon
-            const openIcon = mobileMenuButton.querySelector('svg:first-child');
-            const closeIcon = mobileMenuButton.querySelector('svg:last-child');
-
             if (expanded) {
+                // Tutup menu
                 mobileMenu.classList.add('hidden');
-                openIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
+                menuOpenIcon.classList.remove('hidden');
+                menuCloseIcon.classList.add('hidden');
             } else {
+                // Buka menu
                 mobileMenu.classList.remove('hidden');
-                openIcon.classList.add('hidden');
-                closeIcon.classList.remove('hidden');
+                menuOpenIcon.classList.add('hidden');
+                menuCloseIcon.classList.remove('hidden');
             }
         });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideMenu = mobileMenu.contains(event.target);
+            const isClickOnButton = mobileMenuButton.contains(event.target);
+
+            if (!isClickInsideMenu && !isClickOnButton && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                menuOpenIcon.classList.remove('hidden');
+                menuCloseIcon.classList.add('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Close mobile menu when window is resized to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) { // md breakpoint
+                mobileMenu.classList.add('hidden');
+                menuOpenIcon.classList.remove('hidden');
+                menuCloseIcon.classList.add('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Mobile profile dropdown toggle
+        const mobileProfileDropdownButton = document.getElementById('mobile-profile-dropdown-btn');
+        const mobileProfileDropdownMenu = document.getElementById('mobile-profile-dropdown-menu');
+        if (mobileProfileDropdownButton && mobileProfileDropdownMenu) {
+            mobileProfileDropdownButton.addEventListener('click', function() {
+                mobileProfileDropdownMenu.classList.toggle('hidden');
+            });
+
+            // Close the dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mobileProfileDropdownButton.contains(event.target) && !mobileProfileDropdownMenu
+                    .contains(event
+                        .target)) {
+                    mobileProfileDropdownMenu.classList.add('hidden');
+                }
+            });
+        }
     });
 </script>
