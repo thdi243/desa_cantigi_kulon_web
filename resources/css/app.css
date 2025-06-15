@@ -9,10 +9,7 @@
 /* Mendeklarasikan font lokal */
 @font-face {
     font-family: 'Caveat';
-    src: url('/fonts/caveat/Caveat-Regular.ttf') format('truetype'),
-        url('/fonts/caveat/Caveat-Medium.ttf') format('truetype'),
-        url('/fonts/caveat/Caveat-Bold.ttf') format('truetype'),
-        url('/fonts/caveat/Caveat-SemiBold.ttf') format('truetype');
+    src: url('/fonts/caveat/Caveat-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
