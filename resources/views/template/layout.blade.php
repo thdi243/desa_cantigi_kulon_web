@@ -14,7 +14,22 @@
         {{-- AOS --}}
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+        @php
+            $isProduction = app()->environment('production');
+            $manifestPath = public_path('build/manifest.json');
+        @endphp
+
+        @if ($isProduction && file_exists($manifestPath))
+            @php
+                $manifest = json_decode(file_get_contents($manifestPath), true);
+            @endphp
+            <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/css/app.css']['file']) }}">
+            <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
+        @else
+            @viteReactRefresh
+            @vite(['resources/js/app.js', 'resources/css/app.css'])
+        @endif
 
         @yield('style')
     </head>
