@@ -37,8 +37,6 @@ class SuratController extends Controller
         // Cek apakah pengguna sudah login
         if (!Auth::check()) {
             return redirect()->route('login');
-        } elseif (Auth::user()->role_id !== 2) {
-            return redirect()->route('login');
         }
 
         // Ambil ID jenis surat dari request, default ke 1 jika tidak ada
