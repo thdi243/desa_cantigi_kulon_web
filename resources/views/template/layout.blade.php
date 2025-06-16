@@ -14,14 +14,12 @@
         {{-- AOS --}}
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-
-
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         @yield('style')
     </head>
 
-    <body>
+    <body class="bg-[#FFFDF7]">
         @if (!isset($noNavbar) || $noNavbar !== true)
             @include('template.navbar')
         @endif
