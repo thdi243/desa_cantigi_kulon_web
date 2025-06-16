@@ -236,7 +236,9 @@ class SuratResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        $pendingCount = static::getModel()::where('status', 'pending')->count();
+        $pendingCount = static::getModel()::where('status', 'pending')
+            ->where('user_id', 2)
+            ->count();
 
         // Kembalikan jumlah sebagai string jika ada data pending
         return $pendingCount > 0 ? (string) $pendingCount : null;
