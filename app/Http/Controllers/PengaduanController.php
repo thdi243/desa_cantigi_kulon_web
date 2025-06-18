@@ -26,28 +26,14 @@ class PengaduanController extends Controller
     {
         // dd($request->all());
 
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'name' => ['required', 'string', 'max:255'],
-                'nik' => ['required', 'numeric', 'digits:16'],
-                'category' => ['required', 'string', 'max:255'],
-                'description' => ['required', 'string', 'max:1000'],
-                'location' => ['required', 'string', 'max:255'],
-                'image' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            ],
-            [
-                'nik.digits' => 'NIK harus tepat 16 digit.',
-                'image.max' => 'Ukuran foto maksimal 2MB.',
-                'image.mimes' => 'Format foto harus jpeg, png, jpg',
-            ]
-        );
-
-        // if ($validator->fails()) {
-        //     return redirect()->back()
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'nik' => ['required', 'numeric', 'digits:16'],
+            'category' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:1000'],
+            'location' => ['required', 'string', 'max:255'],
+            'image' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+        ]);
 
         try {
             // store pengaduan

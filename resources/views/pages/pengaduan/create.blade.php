@@ -43,6 +43,9 @@
                                         focus:ring-green-500 focus:border-green-500 
                                         placeholder-gray-400"
                                             placeholder="Masukkan nama lengkap" required>
+                                        @error('name')
+                                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div>
@@ -53,8 +56,9 @@
                                         focus:ring-green-500 focus:border-green-500 
                                         placeholder-gray-400"
                                             placeholder="Nomor Induk Kependudukan" required>
-
-
+                                        @error('nik')
+                                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -81,6 +85,9 @@
                                     focus:ring-green-500 focus:border-green-500 
                                     placeholder-gray-400"
                                         placeholder="Jelaskan pengaduan Anda secara detail" required></textarea>
+                                    @error('description')
+                                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -94,7 +101,11 @@
                                         file:text-sm file:font-semibold
                                         file:bg-green-50 file:text-green-700
                                         hover:file:bg-green-100">
+                                        @error('image')
+                                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
+
                                 </div>
                                 <div>
                                     <label for="location" class="block text-sm font-medium text-gray-700 mb-2">Lokasi
@@ -104,6 +115,9 @@
                                     focus:ring-green-500 focus:border-green-500 
                                     placeholder-gray-400"
                                         placeholder="Alamat lengkap lokasi kejadian" required>
+                                    @error('location')
+                                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="mt-6">
