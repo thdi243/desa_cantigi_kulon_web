@@ -421,13 +421,7 @@ class SuratController extends Controller
         $rules = array_merge($baseRules, $dynamicRules);
 
         // Lakukan validasi
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
+        $request->validate($rules);
 
         try {
             // Ambil semua input dari form

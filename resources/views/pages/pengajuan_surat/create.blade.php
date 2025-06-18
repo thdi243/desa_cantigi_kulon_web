@@ -34,9 +34,13 @@
                     <div class="flex flex-col gap-4 mb-4">
                         <label for="jenis_surat" class="text-sm font-semibold">Jenis Surat</label>
                         <select id="jenis_surat" name="jenis_surat" class="border border-gray-300 rounded-md p-2" required>
-                            <option value="" disabled selected>Pilih Jenis Surat</option>
+                            <option value="" disabled {{ old('jenis_surat') ? '' : 'selected' }}>Pilih Jenis Surat
+                            </option>
                             @foreach ($suratSubTypes as $jenis)
-                                <option value="{{ $jenis->id }}">{{ $jenis->nama_sub_surat }}</option>
+                                <option value="{{ $jenis->id }}"
+                                    {{ old('jenis_surat') == $jenis->id ? 'selected' : '' }}>
+                                    {{ $jenis->nama_sub_surat }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -53,11 +57,17 @@
                                     *</label>
                                 <input type="text" id="nama_lengkap_pemohon" name="nama_lengkap_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
+                                @error('nama_lengkap_pemohon')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="nik_pemohon" class="block text-sm font-medium text-gray-700 mb-1">NIK *</label>
                                 <input type="number" id="nik_pemohon" name="nik_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
+                                @error('nik_pemohon')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="tempat_lahir_pemohon"
@@ -65,12 +75,18 @@
                                     *</label>
                                 <input type="text" id="tempat_lahir_pemohon" name="tempat_lahir_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
+                                @error('tempat_lahir_pemohon')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="tgl_lahir_pemohon" class="block text-sm font-medium text-gray-700 mb-1">Tanggal
                                     Lahir *</label>
                                 <input type="date" id="tgl_lahir_pemohon" name="tgl_lahir_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
+                                @error('tgl_lahir_pemohon')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="jenis_kelamin_pemohon"
@@ -82,12 +98,18 @@
                                     <option value="L">Laki-laki</option>
                                     <option value="P">Perempuan</option>
                                 </select>
+                                @error('jenis_kelamin_pemohon')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="alamat_pemohon" class="block text-sm font-medium text-gray-700 mb-1">Alamat
                                     *</label>
                                 <textarea id="alamat_pemohon" name="alamat_pemohon" rows="2" class="w-full border border-gray-300 rounded-md p-2"
                                     required></textarea>
+                                @error('alamat_pemohon')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="agama_pemohon" class="block text-sm font-medium text-gray-700 mb-1">Agama
@@ -102,6 +124,9 @@
                                     <option value="buddha">Buddha</option>
                                     <option value="konghucu">Konghucu</option>
                                 </select>
+                                @error('agama_pemohon')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label for="pekerjaan_pemohon"
@@ -109,12 +134,18 @@
                                     *</label>
                                 <input type="text" id="pekerjaan_pemohon" name="pekerjaan_pemohon"
                                     class="w-full border border-gray-300 rounded-md p-2" required>
+                                @error('pekerjaan_pemohon')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="md:col-span-2">
                                 <label for="keperluan_pemohon"
                                     class="block text-sm font-medium text-gray-700 mb-1">Keperluan</label>
                                 <textarea id="keperluan_pemohon" name="keperluan_pemohon" rows="2"
                                     class="w-full border border-gray-300 rounded-md p-2" required></textarea>
+                                @error('keperluan_pemohon')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -132,7 +163,7 @@
                     <!-- Tombol kirim -->
                     <div class="flex justify-end">
                         <button type="submit" id="submit_button"
-                            class="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors hidden">
+                            class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors hidden">
                             Kirim Pengajuan
                         </button>
                     </div>
@@ -377,6 +408,14 @@
                     loadIsiSuratFields(jenisSuratSelect.value);
                 }
             }
+
+            // Handle form submission
+            @if (old('jenis_surat'))
+                if (dataPemohonSection) dataPemohonSection.classList.remove('hidden');
+                if (jenisSuratSelect && jenisSuratSelect.value) {
+                    loadIsiSuratFields(jenisSuratSelect.value); // Panggil ulang field isi surat dinamis
+                }
+            @endif
 
             // // Handle form submission
             // if (formPengajuanSurat) {
