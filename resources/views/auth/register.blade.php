@@ -65,8 +65,7 @@
         </div>
 
         <div class="flex items-center justify-center">
-            <a class="text-sm text-gray-600 font-medium text-indigo-600 hover:text-indigo-500"
-                href="{{ route('login') }}">
+            <a class="text-sm text-gray-600 font-medium hover:text-indigo-500" href="{{ route('login') }}">
                 {{ __('Sudah terdaftar?') }}
             </a>
         </div>
