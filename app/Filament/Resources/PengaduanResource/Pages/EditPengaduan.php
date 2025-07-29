@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditPengaduan extends EditRecord
 {
     protected static string $resource = PengaduanResource::class;
+    protected static ?string $title = 'Edit Pengaduan';
 
     protected function getHeaderActions(): array
     {
@@ -17,5 +18,10 @@ class EditPengaduan extends EditRecord
             Actions\ForceDeleteAction::make(),
             Actions\RestoreAction::make(),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 }

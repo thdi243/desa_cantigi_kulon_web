@@ -11,6 +11,7 @@ use Filament\Resources\Components\Tab;
 class ListKabarDesas extends ListRecords
 {
     protected static string $resource = KabarDesaResource::class;
+    protected static ?string $title = 'Daftar Kabar Desa';
 
     protected function getHeaderActions(): array
     {

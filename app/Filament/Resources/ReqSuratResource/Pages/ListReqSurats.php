@@ -11,6 +11,7 @@ use App\Filament\Resources\ReqSuratResource;
 class ListReqSurats extends ListRecords
 {
     protected static string $resource = ReqSuratResource::class;
+    protected static ?string $title = 'Daftar Permohonan Surat';
 
     protected function getHeaderActions(): array
     {

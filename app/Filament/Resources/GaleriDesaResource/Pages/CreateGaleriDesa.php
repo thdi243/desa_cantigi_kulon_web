@@ -9,4 +9,10 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateGaleriDesa extends CreateRecord
 {
     protected static string $resource = GaleriDesaResource::class;
+    protected static ?string $title = 'Tambah Galeri Desa';
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

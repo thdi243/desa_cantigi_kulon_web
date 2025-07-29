@@ -11,6 +11,7 @@ use Filament\Resources\Components\Tab;
 class ListGaleriDesas extends ListRecords
 {
     protected static string $resource = GaleriDesaResource::class;
+    protected static ?string $title = 'Daftar Galeri Desa';
 
     protected function getHeaderActions(): array
     {

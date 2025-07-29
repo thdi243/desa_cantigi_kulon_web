@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditKabarDesa extends EditRecord
 {
     protected static string $resource = KabarDesaResource::class;
+    protected static ?string $title = 'Edit Kabar Desa';
 
     protected function getHeaderActions(): array
     {
@@ -17,5 +18,10 @@ class EditKabarDesa extends EditRecord
             Actions\ForceDeleteAction::make(),
             Actions\RestoreAction::make(),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 }

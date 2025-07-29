@@ -12,6 +12,7 @@ use Filament\Resources\Components\Tab;
 class ListSurats extends ListRecords
 {
     protected static string $resource = SuratResource::class;
+    protected static ?string $title = 'Daftar Surat';
 
     public function getTabs(): array
     {

@@ -13,4 +13,5 @@ use App\Filament\Resources\SuratResource;
 class ViewSurat extends ViewRecord
 {
     protected static string $resource = SuratResource::class;
+    protected static ?string $title = 'Detail Surat';
 }
